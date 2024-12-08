@@ -74,12 +74,30 @@
             font-size: 18px;
             color: #bdc3c7;  /* Light gray text */
             margin: 20px 0;
-            max-width: 800px;
+            max-width: 600px;
             overflow: hidden;
-            white-space: nowrap;
+            white-space: pre-wrap; /* Allows for line breaks to be preserved */
             border-right: .15em solid #ffee10; /* Cursor effect */
             width: 0;
-            animation: typing 6s steps(60) 5s forwards, blink 0.75s step-end infinite;
+            animation: typingDescription 6s steps(60) 5s forwards, blinkDescription 0.75s step-end 6s infinite;
+        }
+
+        @keyframes typingDescription {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blinkDescription {
+            50% {
+                border-color: transparent;
+            }
+            100% {
+                border-color: #ffee10;
+            }
         }
 
         /*--------------------------------------------------------------
