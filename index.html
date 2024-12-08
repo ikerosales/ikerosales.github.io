@@ -46,18 +46,18 @@
             color: #fff;
             margin-top: 100px;
             overflow: hidden;
-            white-space: nowrap;
+            white-space: normal;
+            display: inline-block;
             border-right: .15em solid #ffee10; /* Cursor effect */
-            width: 14ch; /* Adjusted width to match the text length */
-            animation: typingTitle 4s steps(14, end) 1s forwards, blinkCursor 0.75s step-end infinite 4s;
+            animation: typingTitle 4s steps(40, end) 1s forwards, blinkCursor 0.75s step-end infinite 4s;
         }
 
         @keyframes typingTitle {
             from {
-                width: 0;
+                max-width: 0;
             }
             to {
-                width: 14ch;
+                max-width: 100%;
             }
         }
 
@@ -76,18 +76,18 @@
             margin: 20px 0;
             max-width: 800px;
             overflow: hidden;
-            white-space: pre-wrap; /* Allows line breaks */
+            white-space: normal; /* Allows line breaks */
+            display: inline-block;
             border-right: .15em solid #ffee10; /* Cursor effect */
-            width: fit-content; /* Adapt to text width */
-            animation: typingDescription 6s steps(40, end) 5s forwards, blinkCursor 0.75s step-end infinite 11s;
+            animation: typingDescription 6s steps(100, end) 5s forwards, blinkCursor 0.75s step-end infinite 11s;
         }
 
         @keyframes typingDescription {
             from {
-                width: 0;
+                max-width: 0;
             }
             to {
-                width: 40ch;
+                max-width: 100%;
             }
         }
 
@@ -266,13 +266,7 @@
 
     <!-- Brief Description -->
     <p class="description">
-        Data Science and Engineering Student
-    </p>
-     <p class="description">
-        Telecomunications Engineering Student
-    </p>
-    <p class="description">
-        Universidad Carlos III de Madrid.
+        Data Science and Engineering Student & Telecomunications Engineering Student in Universidad Carlos III de Madrid.
     </p>
 
     <!-- Social Icons -->
