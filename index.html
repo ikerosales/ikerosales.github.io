@@ -68,36 +68,18 @@
         }
 
         /*--------------------------------------------------------------
-        # Brief Description Animation (Typing Effect with multi-line support)
+        # Brief Description Animation (Typing Effect)
         --------------------------------------------------------------*/
         .description {
             font-size: 18px;
             color: #bdc3c7;  /* Light gray text */
             margin: 20px 0;
-            max-width: 600px;
+            max-width: 800px;
             overflow: hidden;
-            white-space: pre-wrap; /* Allows for line breaks to be preserved */
+            white-space: nowrap;
             border-right: .15em solid #ffee10; /* Cursor effect */
             width: 0;
-            animation: typingDescription 6s steps(60) 5s forwards, blinkDescription 0.75s step-end 6s infinite;
-        }
-
-        @keyframes typingDescription {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        @keyframes blinkDescription {
-            50% {
-                border-color: transparent;
-            }
-            100% {
-                border-color: #ffee10;
-            }
+            animation: typing 6s steps(60) 5s forwards, blink 0.75s step-end infinite;
         }
 
         /*--------------------------------------------------------------
