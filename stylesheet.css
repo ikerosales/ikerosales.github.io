@@ -1,0 +1,39 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+.skill-icon {
+    font-size: 4rem;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+.skill-icon:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+.about-me img {
+    max-height: 300px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1.5rem 0;
+}
+footer a {
+    color: #0dcaf0;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
