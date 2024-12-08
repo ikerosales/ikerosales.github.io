@@ -2,87 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iker Rosales</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Iker Rosales | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm9oiGhjlcytjEwQ2aWR/MwEKm1CkI5CkVGKA+/cVR3EjBJvN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .skill-icon {
+            font-size: 4rem;
+            color: #6c757d;
+        }
+        .skill-icon:hover {
+            color: #007bff;
+        }
+        .about-me img {
+            max-height: 300px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1.5rem 0;
+        }
+        footer a {
+            color: #0dcaf0;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark ">
-    <div class="container-fluid">
-        <div class="mx-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+        <div class="container">
             <a class="navbar-brand" href="#">Iker Rosales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reading-log">Reading Log</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reading Log</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container my-4 ">
-    <div class="row justify-content-center">
-        <div class="col-lg mb-lg-4">
-            <img src="image.jpg" class="img-fluid" alt="" srcset="">
-        </div>
-        <div class="col-lg mx-2 align-self-center">
-            <div class="my-3">
-                <h1 class="text-center">I'm a Telecommunication Engineering Student and Data Scientist </h1>
-                <p>As a passionate software developer, I am deeply enthusiastic about creating and
-                    developing software applications. I am constantly learning and experimenting with new
-                    technologies and approaches, and I have a strong desire to create innovative and effective
-                    solutions to complex problems. I am driven by my curiosity and love for problem-solving, and
-                    I
-                    am committed to producing high-quality, well-designed software that meets the needs of
-                    users.
+    </nav>
+
+    <!-- About Me Section -->
+    <section class="container my-5 about-me">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center">
+                <img src="image.jpg" class="img-fluid" alt="Iker Rosales">
+            </div>
+            <div class="col-md-6">
+                <h1 class="text-center section-title">I'm a Telecommunication Engineering Student and Data Scientist</h1>
+                <p>
+                    As a passionate software developer, I am deeply enthusiastic about creating and developing software applications.
+                    I am constantly learning and experimenting with new technologies and approaches, and I have a strong desire to
+                    create innovative and effective solutions to complex problems. I am committed to producing high-quality,
+                    well-designed software that meets the needs of users.
                 </p>
             </div>
         </div>
-    </div>
-</div>
-<div class="my-4">
-    <div class="text-center mb-4">
-        <h1>My Skills</h1>
-    </div>
-    <div class="row >        
-        <div class="col">
-            <div class="text-center">
-                <h4>WordPress</h4>
-                <i class="devicon-wordpress-plain"></i>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="section-title">My Skills</h2>
+            <div class="row gy-4">
+                <div class="col-6 col-md-3">
+                    <i class="devicon-wordpress-plain skill-icon"></i>
+                    <h5>WordPress</h5>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="devicon-django-plain skill-icon"></i>
+                    <h5>Django</h5>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="devicon-python-plain skill-icon"></i>
+                    <h5>Python</h5>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="devicon-github-original skill-icon"></i>
+                    <h5>GitHub</h5>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <div class="text-center">
-                <h4>Django</h4>
-                <i class="devicon-django-plain"></i>
-            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2024 Iker Rosales. Built with ❤️ and Bootstrap.</p>
+            <p>
+                <a href="https://github.com/ikerosales" target="_blank">Visit My GitHub</a>
+            </p>
         </div>
-        <div class="col">
-            <div class="text-center">
-                <h4>Python</h4>
-                <i class="devicon-python-plain"></i>
-            </div>
-        </div>
-        <div class="col">
-            <div class="text-center">
-                <h4>GitHub</h4>
-                <i class="devicon-github-original" ></i>
-            </div>
-        </div>
-    </div>
-</div>
-    
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYq8+E7Pb4KLpHVKcR8KxfBTb3ME8Pi6jG9eEgG5D7zU7K8Fpqge09p8" crossorigin="anonymous"></script>
 </body>
 </html>
