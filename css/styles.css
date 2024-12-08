@@ -1,68 +1,68 @@
 /* styles.css */
 
-/* General */
+/* Fuentes */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
 }
 
 /* Navbar */
 .navbar {
-    margin-bottom: 50px;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 /* Sección Acerca de mí */
 #about {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 60px 0;
 }
 
-#about img {
-    border: 5px solid #ccc;
-    margin-top: 20px;
+#about h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+#about p {
+    font-size: 1.2rem;
+    color: #666;
 }
 
 /* Sección Experiencia */
-#experience {
-    background-color: #f4f4f4;
+#experience, #education, #skills, #contact {
     padding: 60px 0;
 }
 
-#experience h4 {
-    color: #007bff;
+/* Encabezado de Sección */
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #333;
 }
 
-/* Sección Educación */
-#education {
-    padding: 60px 0;
+/* Listas */
+ul {
+    padding-left: 1.2rem;
 }
 
-#education h4 {
-    color: #28a745;
-}
-
-/* Sección Habilidades */
-#skills ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-#skills ul li {
-    margin-bottom: 10px;
-}
-
-/* Sección Contacto */
-#contact {
-    background-color: #343a40;
-    padding: 60px 0;
-}
-
-#contact form .form-control {
-    border-radius: 0;
+ul li {
+    font-size: 1.1rem;
+    color: #666;
 }
 
 /* Footer */
 footer {
     background-color: #212529;
-    color: #fff;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+/* Enlaces */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
