@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iker Rosales - Página Principal</title>
-    <!-- Fuentes de Google -->
+    <title>Iker Rosales - Main Page</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <!-- Iconos de FontAwesome -->
+    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -17,8 +17,8 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a;  /* Fondo más oscuro */
-            color: #ecf0f1;  /* Texto claro */
+            background: #262626;  /* Darker background */
+            color: #ecf0f1;  /* Light text */
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,7 +29,7 @@
         }
 
         /*--------------------------------------------------------------
-        # Nombre interactivo
+        # Name Animation
         --------------------------------------------------------------*/
         h1 {
             font-size: 70px;
@@ -52,21 +52,21 @@
         }
 
         /*--------------------------------------------------------------
-        # Descripción breve
+        # Brief Description
         --------------------------------------------------------------*/
         .description {
             font-size: 18px;
-            color: #bdc3c7;  /* Texto gris claro */
+            color: #bdc3c7;  /* Light gray text */
             margin: 20px 0;
             max-width: 600px;
         }
 
         /*--------------------------------------------------------------
-        # Barra de navegación
+        # Navigation Bar
         --------------------------------------------------------------*/
         nav {
             width: 100%;
-            background-color: #333;  /* Fondo más oscuro para la barra */
+            background-color: #333;  /* Dark background for the nav bar */
             position: fixed;
             top: 0;
             left: 0;
@@ -98,7 +98,7 @@
         }
 
         nav ul li a:hover {
-            color: #f39c12;  /* Amarillo cuando se hace hover */
+            color: #ffee10;  /* Electric yellow on hover */
             transform: translateY(-5px);
         }
 
@@ -107,7 +107,7 @@
             position: absolute;
             width: 100%;
             height: 3px;
-            background-color: #f39c12;  /* Subrayado amarillo */
+            background-color: #ffee10;  /* Yellow underline */
             left: 0;
             bottom: 0;
             transform: scaleX(0);
@@ -121,7 +121,7 @@
         }
 
         /*--------------------------------------------------------------
-        # Redes sociales
+        # Social Icons
         --------------------------------------------------------------*/
         .social-icons {
             margin-top: 20px;
@@ -130,19 +130,62 @@
             gap: 20px;
         }
 
-        .social-icons a {
-            color: #ecf0f1;
-            font-size: 30px;
-            transition: color 0.3s ease, transform 0.3s ease;
+        .social-icons ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .social-icons a:hover {
-            color: #f39c12;  /* Amarillo en hover */
-            transform: translateY(-5px);
+        .social-icons ul li {
+            list-style: none;
+            margin: 0 15px;
+        }
+
+        .social-icons ul li a {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            background: #333;
+            border-radius: 50%;
+            font-size: 30px;
+            color: #666;
+            transition: 0.5s;
+        }
+
+        .social-icons ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #ffee10;
+            transition: 0.5s;
+            transform: scale(0.9);
+            z-index: -1;
+        }
+
+        .social-icons ul li a:hover::before {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ffee10;
+        }
+
+        .social-icons ul li a:hover {
+            color: #ffee10;  /* Electric yellow on hover */
+            box-shadow: 0 0 5px #ffee10;
+            text-shadow: 0 0 5px #ffee10;
         }
 
         /*--------------------------------------------------------------
-        # Responsividad
+        # Responsiveness
         --------------------------------------------------------------*/
         @media (max-width: 768px) {
             h1 {
@@ -155,33 +198,38 @@
             nav ul li {
                 margin: 10px 0;
             }
+            .social-icons ul {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Barra de navegación -->
+    <!-- Navigation Bar -->
     <nav>
         <ul>
-            <li><a href="#about">Acerca de</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Nombre interactivo -->
+    <!-- Interactive Name -->
     <h1>Iker Rosales</h1>
 
-    <!-- Descripción breve sobre ti -->
+    <!-- Brief Description -->
     <p class="description">
-        Soy un apasionado por la tecnología y las redes, con experiencia en investigación y análisis de datos. Siempre buscando nuevos desafíos para aprender y crecer profesionalmente.
+        I'm passionate about technology and networks, with experience in research and data analysis. Always seeking new challenges to learn and grow professionally.
     </p>
 
-    <!-- Iconos de redes sociales -->
+    <!-- Social Icons -->
     <div class="social-icons">
-        <a href="https://www.linkedin.com/in/iker-rosales/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/ikerrosales" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://twitter.com/IkerRosales_" target="_blank"><i class="fab fa-twitter"></i></a>
+        <ul>
+            <li><a href="mailto:your-email@example.com" target="_blank"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/iker-rosales/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://github.com/ikerrosales" target="_blank"><i class="fab fa-github"></i></a></li>
+        </ul>
     </div>
 
 </body>
