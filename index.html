@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iker Rosales - Data Science & Telecommunications Engineer</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 4 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -15,11 +14,9 @@
     <!-- Estilo personalizado -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
-
 <body>
-
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">Iker Rosales</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,113 +35,156 @@
     </nav>
 
     <!-- Sección Acerca de mí -->
-    <section id="about" class="text-center py-5">
+    <section id="about" class="py-5 bg-light">
         <div class="container">
-            <h1 class="display-4">Hola, soy Iker Rosales</h1>
-            <p class="lead">Soy estudiante de Ingeniería en Telecomunicaciones y Ciencia de Datos, con experiencia en machine learning, análisis de datos y seguridad de redes. Me apasiona aprender y afrontar nuevos desafíos tecnológicos.</p>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="display-4 text-primary font-weight-bold mb-4">Hola, soy Iker Rosales</h1>
+                    <p class="lead">Soy estudiante de Ingeniería en Telecomunicaciones y Ciencia de Datos, con experiencia en machine learning, análisis de datos y seguridad de redes. Me apasiona aprender y afrontar nuevos desafíos tecnológicos.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/profile.jpg" class="img-fluid rounded-circle shadow" alt="Iker Rosales">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Sección Experiencia -->
-    <section id="experience" class="bg-light py-5">
+    <section id="experience" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-4">Experiencia</h2>
+            <h2 class="text-primary font-weight-bold mb-5">Experiencia</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <h5>Research Assistant Intern - IMDEA Networks Institute</h5>
-                    <p><strong>Septiembre 2024 - Actualidad</strong></p>
-                    <p>Investigación en redes y telecomunicaciones, análisis de grandes volúmenes de datos y seguridad de redes.</p>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Research Assistant Intern - IMDEA Networks Institute</h5>
+                            <p class="card-text"><small class="text-muted">Septiembre 2024 - Actualidad</small></p>
+                            <p class="card-text">Investigación en redes y telecomunicaciones, análisis de grandes volúmenes de datos y seguridad de redes.</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <h5>Eventos y Comunidad - UC3M Business Analytics Association</h5>
-                    <p><strong>Septiembre 2024 - Actualidad</strong></p>
-                    <p>Organización de eventos y actividades para fomentar el aprendizaje en análisis de datos y tecnologías emergentes.</p>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Eventos y Comunidad - UC3M Business Analytics Association</h5>
+                            <p class="card-text"><small class="text-muted">Septiembre 2024 - Actualidad</small></p>
+                            <p class="card-text">Organización de eventos y actividades para fomentar el aprendizaje en análisis de datos y tecnologías emergentes.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Machine Learning Member - NTU Open Source Society</h5>
-                    <p><strong>Noviembre 2023 - Agosto 2024</strong></p>
-                    <p>Desarrollo de modelos de machine learning para la clasificación de ataques en redes, obteniendo un 98% de precisión.</p>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h5>Profesor Particular - Freelance</h5>
-                    <p><strong>Octubre 2021 - Junio 2024</strong></p>
-                    <p>Clases particulares de programación, física y matemáticas a estudiantes de ingeniería y bachillerato.</p>
-                </div>
+                <!-- Agrega más tarjetas de experiencia aquí -->
             </div>
         </div>
     </section>
 
     <!-- Sección Educación -->
-    <section id="education" class="py-5">
+    <section id="education" class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Educación</h2>
+            <h2 class="text-primary font-weight-bold mb-5">Educación</h2>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <h5>Dual Bachelor's Degree - UC3M</h5>
-                    <p><strong>Enero 2021 - Junio 2026</strong></p>
-                    <p>Estudios en Ciencia de Datos y Telecomunicaciones, con un programa de intercambio en Singapur.</p>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Dual Bachelor's Degree - UC3M</h5>
+                            <p class="card-text"><small class="text-muted">Enero 2021 - Junio 2026</small></p>
+                            <p class="card-text">Estudios en Ciencia de Datos y Telecomunicaciones, con un programa de intercambio en Singapur.</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <h5>Intercambio - Nanyang Technological University</h5>
-                    <p><strong>Agosto 2023 - Mayo 2024</strong></p>
-                    <p>Estudios en Ingeniería Electrónica y Ciencia de Datos en una de las mejores universidades del mundo.</p>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Intercambio - Nanyang Technological University</h5>
+                            <p class="card-text"><small class="text-muted">Agosto 2023 - Mayo 2024</small></p>
+                            <p class="card-text">Estudios en Ingeniería Electrónica y Ciencia de Datos en una de las mejores universidades del mundo.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-12 mb-4">
-                    <h5>Bachillerato Tecnológico - Colegio Santa María de la Hispanidad</h5>
-                    <p><strong>Septiembre 2019 - Mayo 2021</strong></p>
-                    <p>Formación en ciencias y tecnología, destacando en matemáticas y física.</p>
-                </div>
+                <!-- Agrega más tarjetas de educación aquí -->
             </div>
         </div>
     </section>
 
     <!-- Sección Habilidades -->
-    <section id="skills" class="bg-light py-5">
+    <section id="skills" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-4">Habilidades</h2>
+            <h2 class="text-primary font-weight-bold mb-5">Habilidades</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <h5>Telecomunicaciones y Redes</h5>
-                    <ul>
-                        <li>Redes de telecomunicaciones</li>
-                        <li>Seguridad de redes</li>
-                        <li>Apache Spark</li>
-                    </ul>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Telecomunicaciones y Redes</h5>
+                            <ul>
+                                <li>Redes de telecomunicaciones</li>
+                                <li>Seguridad de redes</li>
+                                <li>Apache Spark</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h5>Data Science y Machine Learning</h5>
-                    <ul>
-                        <li>Python, R, SQL</li>
-                        <li>Machine Learning (scikit-learn, TensorFlow)</li>
-                        <li>Modelos predictivos</li>
-                    </ul>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Science y Machine Learning</h5>
+                            <ul>
+                                <li>Python, R, SQL</li>
+                                <li>Machine Learning (scikit-learn, TensorFlow)</li>
+                                <li>Modelos predictivos</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h5>Gestión de Proyectos</h5>
-                    <ul>
-                        <li>Gestión de eventos y equipos</li>
-                        <li>Comunicación efectiva</li>
-                        <li>Resolución de problemas</li>
-                    </ul>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Gestión de Proyectos</h5>
+                            <ul>
+                                <li>Gestión de eventos y equipos</li>
+                                <li>Comunicación efectiva</li>
+                                <li>Resolución de problemas</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sección Contacto -->
-    <section id="contact" class="py-5">
-        <div class="container text-center">
-            <h2 class="mb-4">Contacto</h2>
-            <p class="lead">Puedes contactarme a través de los siguientes medios:</p>
-            <p><strong>Email:</strong> <a href="mailto:iker251203@gmail.com">iker251203@gmail.com</a></p>
-            <p><strong>Teléfono:</strong> <a href="tel:+34620483281">620 48 32 81</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/iker-rosales-saiz-49218531b" target="_blank">linkedin.com/in/iker-rosales-saiz-49218531b</a></p>
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-primary font-weight-bold mb-5">Contacto</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Ingresa tu email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mensaje</label>
+                                    <textarea class="form-control" id="message" rows="3" placeholder="Escribe tu mensaje" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Iker Rosales. Todos los derechos reservados.</p>
+    <footer class="bg-primary text-white py-3">
+        <div class="container text-center">
+            <p>&copy; 2024 Iker Rosales. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
     <!-- Bootstrap y jQuery Scripts -->
@@ -152,5 +192,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
