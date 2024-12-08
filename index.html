@@ -7,23 +7,23 @@
     <title>Iker Rosales | Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm9oiGhjlcytjEwQ2aWR/MwEKm1CkI5CkVGKA+/cVR3EjBJvN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.14.0/devicon.min.css">
-    <link rel="stylesheet" href="style.css"> <!-- Archivo CSS externo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
-            <a class="navbar-brand" href="#">Iker Rosales</a>
+            <a class="navbar-brand fw-bold" href="#">Iker Rosales</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
+                        <a class="nav-link active" aria-current="page" href="#about">About Me</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#reading-log">Reading Log</a>
+                        <a class="nav-link" href="#projects">Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#skills">Skills</a>
@@ -34,13 +34,13 @@
     </nav>
 
     <!-- About Me Section -->
-    <section class="container my-5 about-me">
+    <section id="about" class="container my-5 py-5">
         <div class="row align-items-center">
             <div class="col-md-6 text-center">
-                <img src="image.jpg" class="img-fluid" alt="Iker Rosales">
+                <img src="image.jpg" class="img-fluid rounded shadow" alt="Iker Rosales">
             </div>
             <div class="col-md-6">
-                <h1 class="text-center section-title">I'm a Telecommunication Engineering Student and Data Scientist</h1>
+                <h1 class="section-title">I'm a Telecommunication Engineering Student and Data Scientist</h1>
                 <p>
                     As a passionate software developer, I am deeply enthusiastic about creating and developing software applications.
                     I am constantly learning and experimenting with new technologies and approaches, and I have a strong desire to
@@ -54,7 +54,7 @@
     <!-- Skills Section -->
     <section id="skills" class="bg-light py-5">
         <div class="container text-center">
-            <h2 class="section-title">My Skills</h2>
+            <h2 class="section-title mb-4">My Skills</h2>
             <div class="row gy-4">
                 <div class="col-6 col-md-3">
                     <i class="devicon-wordpress-plain skill-icon"></i>
@@ -77,11 +77,11 @@
     </section>
 
     <!-- Footer -->
-    <footer class="text-center">
+    <footer class="bg-dark text-white text-center py-4">
         <div class="container">
             <p>© 2024 Iker Rosales. Built with ❤️ and Bootstrap.</p>
             <p>
-                <a href="https://github.com/ikerosales" target="_blank">Visit My GitHub</a>
+                <a href="https://github.com/ikerosales" class="text-decoration-none text-light" target="_blank">Visit My GitHub</a>
             </p>
         </div>
     </footer>
