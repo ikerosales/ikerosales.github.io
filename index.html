@@ -44,12 +44,12 @@
             font-weight: 600;
             letter-spacing: 3px;
             color: #fff;
-            margin-top: 100px;
+            margin: 0 auto;
             overflow: hidden;
-            white-space: normal;
+            white-space: nowrap; /* Mantiene el texto en una línea */
             display: inline-block;
             border-right: .15em solid #ffee10; /* Cursor effect */
-            animation: typingTitle 4s steps(40, end) 1s forwards, blinkCursor 0.75s step-end infinite 4s;
+            animation: typingTitle 4s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
         }
 
         @keyframes typingTitle {
@@ -61,34 +61,38 @@
             }
         }
 
+        /* Animación del cursor parpadeante */
         @keyframes blinkCursor {
             50% {
                 border-color: transparent;
             }
         }
 
-        /*--------------------------------------------------------------
-        # Brief Description Animation (Typing Effect)
-        --------------------------------------------------------------*/
-        .description {
-            font-size: 18px;
-            color: #bdc3c7;  /* Light gray text */
-            margin: 20px 0;
-            max-width: 800px;
-            overflow: hidden;
-            white-space: normal; /* Allows line breaks */
-            display: inline-block;
-            border-right: .15em solid #ffee10; /* Cursor effect */
-            animation: typingDescription 6s steps(100, end) 5s forwards, blinkCursor 0.75s step-end infinite 11s;
+
+        /* Estilo base para cada línea de texto */
+        .description .line {
+            display: inline-block; /* Necesario para la animación */
+            overflow: hidden; /* Oculta el texto antes de ser escrito */
+            white-space: nowrap; /* Mantiene el texto en una sola línea */
+            border-right: .15em solid #ffee10; /* Cursor efecto */
+            animation: typingLine 2s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
+            max-width: 0; /* Comienza oculto */
         }
 
-        @keyframes typingDescription {
+        /* Animación para escribir cada línea */
+        @keyframes typingLine {
             from {
                 max-width: 0;
             }
             to {
-                max-width: 100%;
+                max-width: 100%; /* Despliega todo el texto de la línea */
             }
+        }
+        
+        .enf{
+            font-size: 18px; /* Aumenta el tamaño de la fuente */
+            color: #ffee10; /* Cambia el color a un amarillo brillante */
+            font-weight: bold italic; /* Hace que la última línea sea más gruesa */
         }
 
 
@@ -267,8 +271,10 @@
 
     <!-- Brief Description -->
     <p class="description">
-        Data Science and Engineering Student & Telecomunications Engineering Student in Universidad Carlos III de Madrid.
-    </p>
+    <span class="line" style="animation-delay: 4s;">Data Science and Engineering Student.</span><br>
+    <span class="line" style="animation-delay: 6s;">Telecomunications Engineering Student</span><br>
+    <span class="line enf" style="animation-delay: 8s;">Universidad Carlos III de Madrid.</span>
+</p>
 
     <!-- Social Icons -->
     <div class="social-icons">
