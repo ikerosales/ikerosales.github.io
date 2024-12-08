@@ -1,45 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Proyecto en GitHub Pages</title>
+    <title>Iker Rosales - Data Science & Telecommunications Engineering</title>
 
-    <!-- Enlace a Bootstrap (desde CDN) -->
+    <!-- Bootstrap CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Enlace a tu CSS personalizado -->
+    <!-- Estilo personalizado -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
-
-    <div class="container">
-        <header class="my-5">
-            <h1 class="display-4 text-center">¡Bienvenido a mi sitio en GitHub Pages!</h1>
-        </header>
-
-        <section class="row">
-            <div class="col-md-6">
-                <h2>Sección 1</h2>
-                <p>Este es un texto de prueba para que puedas ver cómo se ve la página con Bootstrap y tu propio CSS.</p>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Iker Rosales</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#about">Acerca de mí</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experiencia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education">Educación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-6">
-                <h2>Sección 2</h2>
-                <p>Otro bloque de contenido. Modifica este archivo para personalizar tu sitio web.</p>
+        </div>
+    </nav>
+
+    <!-- Sección Acerca de mí -->
+    <section id="about" class="text-center my-5">
+        <div class="container">
+            <h2 class="display-4">Hola, soy Iker Rosales</h2>
+            <p class="lead">Soy estudiante de Ingeniería en Telecomunicaciones y Ciencia de Datos, con experiencia en machine learning, análisis de datos y seguridad de redes.</p>
+            <img src="img/iker.jpg" alt="Iker Rosales" class="img-fluid rounded-circle" width="200">
+        </div>
+    </section>
+
+    <!-- Sección de Experiencia -->
+    <section id="experience" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center">Mi Experiencia</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Research Assistant Intern - IMDEA Networks Institute</h4>
+                    <p><strong>Septiembre 2024 - Actualidad</strong></p>
+                    <p>Participando en la investigación sobre redes y telecomunicaciones, enfocándome en el análisis de grandes volúmenes de datos.</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Eventos y Comunidad - UC3M Business Analytics Association</h4>
+                    <p><strong>Septiembre 2024 - Actualidad</strong></p>
+                    <p>Colaboración en la gestión de eventos y actividades comunitarias, promoviendo el aprendizaje y la interacción entre estudiantes y profesionales del sector.</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Machine Learning Member - NTU Open Source Society</h4>
+                    <p><strong>Noviembre 2023 - Agosto 2024</strong></p>
+                    <p>Desarrollo de modelos de machine learning para la clasificación de ataques en redes, logrando una precisión del 98% en las clasificaciones.</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Profesor Particular - Freelance</h4>
+                    <p><strong>Octubre 2021 - Junio 2024</strong></p>
+                    <p>Impartí clases de tutoría a estudiantes de Ingeniería Industrial y Bachillerato en asignaturas como programación, física, cálculo y estadística.</p>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer class="text-center mt-5">
-            <p>Creado con <span class="text-danger">♥</span> usando GitHub Pages</p>
-        </footer>
-    </div>
+    <!-- Sección de Educación -->
+    <section id="education" class="py-5">
+        <div class="container">
+            <h2 class="text-center">Mi Educación</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Dual Bachelor's Degree - UC3M</h4>
+                    <p><strong>Enero 2021 - Junio 2026</strong></p>
+                    <p>Estudios de Ingeniería en Ciencia de Datos y Telecomunicaciones en la Universidad Carlos III de Madrid, con un programa de intercambio en Singapur.</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Intercambio - Nanyang Technological University</h4>
+                    <p><strong>Agosto 2023 - Mayo 2024</strong></p>
+                    <p>Programa de intercambio en Ingeniería Electrónica y Ciencia de Datos, donde amplié mis conocimientos en tecnologías de telecomunicaciones y machine learning.</p>
+                </div>
+                <div class="col-md-12">
+                    <h4>Bachillerato Tecnológico - Colegio Santa María de la Hispanidad</h4>
+                    <p><strong>Septiembre 2019 - Mayo 2021</strong></p>
+                    <p>Formación en ciencias y tecnología con especialización en matemáticas y física, logrando una matrícula de honor en el Bachillerato.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Enlace a jQuery y Bootstrap JS (desde CDN) -->
+    <!-- Sección de Habilidades -->
+    <section id="skills" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center">Habilidades</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Telecomunicaciones y Redes</h4>
+                    <ul>
+                        <li>Redes de telecomunicaciones</li>
+                        <li>Seguridad en redes</li>
+                        <li>Apache Spark</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Data Science y Machine Learning</h4>
+                    <ul>
+                        <li>Python, R</li>
+                        <li>Machine Learning (scikit-learn, TensorFlow)</li>
+                        <li>Modelos de clasificación y regresión</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Otros</h4>
+                    <ul>
+                        <li>Gestión de eventos</li>
+                        <li>Trabajo en equipo</li>
+                        <li>Comunicación efectiva</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact" class="bg-dark text-white py-5">
+        <div class="container">
+            <h2 class="text-center">Contacto</h2>
+            <p class="text-center">Puedes contactarme a través de mi correo electrónico o por LinkedIn.</p>
+            <div class="text-center">
+                <p><strong>Correo Electrónico:</strong> <a href="mailto:iker251203@gmail.com" class="text-white">iker251203@gmail.com</a></p>
+                <p><strong>Teléfono:</strong> <a href="tel:+34620483281" class="text-white">620 48 32 81</a></p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/iker-rosales-saiz-49218531b" class="text-white" target="_blank">linkedin.com/in/iker-rosales-saiz-49218531b</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Iker Rosales. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap y jQuery Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Tu archivo JavaScript personalizado -->
-    <script src="js/script.js"></script>
 </body>
+
 </html>
