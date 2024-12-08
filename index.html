@@ -49,10 +49,10 @@
             white-space: nowrap;
             border-right: .15em solid #ffee10; /* Cursor effect */
             width: 0;
-            animation: typing 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
+            animation: typingTitle 4s steps(40) 1s forwards, blinkCursor 0.75s step-end infinite 4s;
         }
 
-        @keyframes typing {
+        @keyframes typingTitle {
             from {
                 width: 0;
             }
@@ -61,7 +61,7 @@
             }
         }
 
-        @keyframes blink {
+        @keyframes blinkCursor {
             50% {
                 border-color: transparent;
             }
@@ -76,10 +76,19 @@
             margin: 20px 0;
             max-width: 800px;
             overflow: hidden;
-            white-space: nowrap;
+            white-space: pre-wrap; /* Allows line breaks */
             border-right: .15em solid #ffee10; /* Cursor effect */
             width: 0;
-            animation: typing 6s steps(60) 5s forwards, blink 0.75s step-end infinite;
+            animation: typingDescription 6s steps(60) 5s forwards, blinkCursor 0.75s step-end infinite 11s;
+        }
+
+        @keyframes typingDescription {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
 
         /*--------------------------------------------------------------
