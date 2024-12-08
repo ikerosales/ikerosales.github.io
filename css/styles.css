@@ -1,24 +1,68 @@
 /* styles.css */
 
+/* General */
 body {
-    background-color: #4882cf;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
 }
 
-h1, h2 {
-    color: #333;
+/* Navbar */
+.navbar {
+    margin-bottom: 50px;
 }
 
+/* Sección Acerca de mí */
+#about {
+    background-color: #fff;
+    padding: 60px 0;
+}
+
+#about img {
+    border: 5px solid #ccc;
+    margin-top: 20px;
+}
+
+/* Sección Experiencia */
+#experience {
+    background-color: #f4f4f4;
+    padding: 60px 0;
+}
+
+#experience h4 {
+    color: #007bff;
+}
+
+/* Sección Educación */
+#education {
+    padding: 60px 0;
+}
+
+#education h4 {
+    color: #28a745;
+}
+
+/* Sección Habilidades */
+#skills ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#skills ul li {
+    margin-bottom: 10px;
+}
+
+/* Sección Contacto */
+#contact {
+    background-color: #343a40;
+    padding: 60px 0;
+}
+
+#contact form .form-control {
+    border-radius: 0;
+}
+
+/* Footer */
 footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-}
-
-footer p {
-    margin: 0;
-}
-
-.text-danger {
-    color: #e74c3c !important;
+    background-color: #212529;
+    color: #fff;
 }
