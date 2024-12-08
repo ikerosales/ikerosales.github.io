@@ -37,7 +37,7 @@
         }
 
         /*--------------------------------------------------------------
-        # Name Animation
+        # Title Animation (Typing Effect)
         --------------------------------------------------------------*/
         h1 {
             font-size: 70px;
@@ -45,28 +45,41 @@
             letter-spacing: 3px;
             color: #fff;
             margin-top: 100px;
-            opacity: 0;
-            animation: fadeIn 2s forwards, moveUp 1s forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid #ffee10; /* Cursor effect */
+            width: 0;
+            animation: typing 4s steps(40) 1s forwards, blink 0.75s step-end infinite;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
 
-        @keyframes moveUp {
-            from { transform: translateY(50px); }
-            to { transform: translateY(0); }
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
         }
 
         /*--------------------------------------------------------------
-        # Brief Description
+        # Brief Description Animation (Typing Effect)
         --------------------------------------------------------------*/
         .description {
             font-size: 18px;
             color: #bdc3c7;  /* Light gray text */
             margin: 20px 0;
             max-width: 800px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: .15em solid #ffee10; /* Cursor effect */
+            width: 0;
+            animation: typing 6s steps(60) 5s forwards, blink 0.75s step-end infinite;
         }
 
         /*--------------------------------------------------------------
