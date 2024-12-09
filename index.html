@@ -49,9 +49,9 @@
             white-space: nowrap; /* Mantiene el texto en una línea */
             display: inline-block;
             border-right: .15em solid #ffee10; /* Cursor effect */
-            animation: typingTitle 4s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
+            animation: typingTitle 4s steps(40, end) forwards;/* , blinkCursor 0.75s step-end infinite;*/
         }
-
+        
         @keyframes typingTitle {
             from {
                 max-width: 0;
@@ -60,25 +60,24 @@
                 max-width: 100%;
             }
         }
-
+        
         /* Animación del cursor parpadeante */
         @keyframes blinkCursor {
             50% {
                 border-color: transparent;
             }
         }
-
-
+        
         /* Estilo base para cada línea de texto */
         .description .line {
-            display: inline-block; /* Necesario para la animación */
+            display: block; /* Se comporta como un bloque para líneas separadas */
             overflow: hidden; /* Oculta el texto antes de ser escrito */
             white-space: nowrap; /* Mantiene el texto en una sola línea */
-            border-right: .15em solid #ffee10; /* Cursor efecto */
-            animation: typingLine 2s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
+            border-right: .15em solid transparent; /* Inicialmente sin cursor */
+            animation: typingLine 2s steps(40, end) forwards;
             max-width: 0; /* Comienza oculto */
         }
-
+        
         /* Animación para escribir cada línea */
         @keyframes typingLine {
             from {
@@ -89,10 +88,17 @@
             }
         }
         
-        .enf{
+        /* Última línea con el cursor activo */
+        .description .line.enf {
+            border-right-color: #ffee10; /* Activa el cursor */
+            animation: typingLine 2s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
+        }
+        
+        /* Ajuste de estilo para la última línea */
+        .enf {
             font-size: 18px; /* Aumenta el tamaño de la fuente */
             color: #ffee10; /* Cambia el color a un amarillo brillante */
-            font-weight: bold italic; /* Hace que la última línea sea más gruesa */
+            font-weight: bold; /* Hace que la última línea sea más gruesa */
         }
 
 
