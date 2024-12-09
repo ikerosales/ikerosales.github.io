@@ -39,19 +39,22 @@
         /*--------------------------------------------------------------
         # Title Animation (Typing Effect)
         --------------------------------------------------------------*/
-       h1 {
+        h1 {
             font-size: 70px;
             font-weight: 600;
             letter-spacing: 3px;
             color: #fff;
             margin: 0 auto;
             overflow: hidden;
-            white-space: nowrap; /* Mantiene el texto en una línea */
+            white-space: nowrap;
             display: inline-block;
-            border-right: .15em solid #ffee10; /* Cursor effect */
-            animation: typingTitle 4s steps(40, end) forwards;/* , blinkCursor 0.75s step-end infinite;*/
+            border-right: .15em solid #ffee10;
+            animation: 
+                typingTitle 3s steps(40, end) forwards, 
+                blinkCursor 0.75s step-end forwards 2.5s,
+                removeCursor 1.5s step-end forwards;
         }
-        
+
         @keyframes typingTitle {
             from {
                 max-width: 0;
@@ -60,46 +63,73 @@
                 max-width: 100%;
             }
         }
-        
-        /* Animación del cursor parpadeante */
+
         @keyframes blinkCursor {
             50% {
-                border-color: transparent;
+                border-right-color: transparent;
             }
         }
-        
-        /* Estilo base para cada línea de texto */
-        .description .line {
-            display: block; /* Se comporta como un bloque para líneas separadas */
-            overflow: hidden; /* Oculta el texto antes de ser escrito */
-            white-space: nowrap; /* Mantiene el texto en una sola línea */
-            border-right: .15em solid transparent; /* Inicialmente sin cursor */
-            animation: typingLine 2s steps(40, end) forwards;
-            max-width: 0; /* Comienza oculto */
+
+        @keyframes removeCursor {
+            to {
+                border-right-color: transparent;
+                border-right-width: 0;
+            }
         }
-        
-        /* Animación para escribir cada línea */
+
+        .description .line {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 0;
+            opacity: 0;
+        }
+
+        .description .line:not(.enf) {
+            border-right: .15em solid #ffee10;
+            animation: 
+                waitForPrevious 0s forwards,
+                typingLine 2.3s steps(40, end) forwards,
+                blinkCursor 0.75s step-end forwards 2s,
+                removeCursor 1.5s step-end forwards;
+        }
+
+
+        .description .line.enf {
+            border-right: .15em solid #ffee10;
+            animation: 
+                waitForPrevious 0s forwards,
+                typingLine 2s steps(25, end) forwards,
+                blinkCursor 0.75s step-end infinite;
+            animation-delay: 2.5s; /* Adjusted for better flow */
+        }
+
+        @keyframes waitForPrevious {
+            to {
+                opacity: 1;
+            }
+        }
+
         @keyframes typingLine {
             from {
                 max-width: 0;
             }
             to {
-                max-width: 100%; /* Despliega todo el texto de la línea */
+                max-width: 100%;
             }
         }
-        
-        /* Última línea con el cursor activo */
-        .description .line.enf {
-            border-right-color: #ffee10; /* Activa el cursor */
-            animation: typingLine 2s steps(40, end) forwards, blinkCursor 0.75s step-end infinite;
-        }
-        
-        /* Ajuste de estilo para la última línea */
+
         .enf {
-            font-size: 18px; /* Aumenta el tamaño de la fuente */
-            color: #ffee10; /* Cambia el color a un amarillo brillante */
-            font-weight: bold; /* Hace que la última línea sea más gruesa */
+            font-size: 18px;
+            color: #ffee10;
+            font-weight: bold;
+            font-style: italic;
         }
+
+
+
+
+
 
 
         /*--------------------------------------------------------------
@@ -266,9 +296,9 @@
     <!-- Navigation Bar -->
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -278,8 +308,8 @@
     <!-- Brief Description -->
     <p class="description">
     <span class="line" style="animation-delay: 2s;">Data Science and Engineering Student.</span><br>
-    <span class="line" style="animation-delay: 4s;">Telecomunications Engineering Student</span><br>
-    <span class="line enf" style="animation-delay: 6s;">Universidad Carlos III de Madrid.</span>
+    <span class="line" style="animation-delay: 5s;">Telecomunications Engineering Student</span><br>
+    <span class="line enf" style="animation-delay: 8s;">Universidad Carlos III de Madrid.</span>
 </p>
 
     <!-- Social Icons -->
