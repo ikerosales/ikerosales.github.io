@@ -128,7 +128,7 @@
         }
 
         /*--------------------------------------------------------------
-        # About Section
+        # Project Section
         --------------------------------------------------------------*/
         .projects {
             margin-top: 100px;
@@ -154,6 +154,21 @@
             color: #ffee10;
             font-weight: bold;
             font-size: 24px;
+        }
+
+        .projects .btn {
+            background-color: #ffee10;
+            padding: 15px 30px;
+            color: #262626;
+            font-size: 18px;
+            text-decoration: none;
+            margin-top: 30px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .projects .btn:hover {
+            background-color: #f9c10e;
         }
 
         /*--------------------------------------------------------------
@@ -203,10 +218,20 @@
         </ul>
     </nav>
 
-    <!-- About Section -->
+    <!-- Projects Section -->
     <div class="projects">
-        <h2>Projects</h2>
-        <p>Welcome to my Projects page. I am currently working on adding more details about my projects. This section is under construction.</p>
+        <h2>AI & Data related Job Offers - NLP analysis</h2>
+        <p>Welcome to the <strong>NLP-Data-Job-Offers</strong> repository. This project explores the analysis of job offers using Natural Language Processing (NLP) to uncover insights on salary predictions, job-related skills, and categories within job descriptions.</p>
+        
+        <!-- Button linking to lda_web.html -->
+        <a href="projects_files/lda_web.html" class="btn" target="_blank">View NLP Project - AI & Data Job Offers</a>
+        
+        <h3>Project Description</h3>
+        <p>This project started with a simple question: Can we predict job salaries from job descriptions using NLP? By analyzing thousands of real-world job postings, we built a regression model capable of estimating the expected maximum salary.</p>
+        <p>Key insights: We explored techniques like TF-IDF, FastText, and LDA, unveiling hidden job categories and uncovering the impact of job benefits vs technical skills. Additionally, we tackled the challenge of salary estimation where the data is often unclear or missing.</p>
+
+        <h3>Repository: <a href="https://github.com/ikerosales/NLP-Data-Job-Offers" target="_blank">NLP-Data-Job-Offers</a></h3>
+
         <p class="status">Status: Under Construction</p>
     </div>
 
