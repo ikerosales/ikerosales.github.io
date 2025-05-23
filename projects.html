@@ -228,8 +228,9 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             padding: 20px;
-            text-align: center; /* Centra el texto */
-            overflow: hidden;
+            text-align: center;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
         
         .project-card:hover .project-overlay {
@@ -242,13 +243,13 @@
             margin-bottom: 15px;
         }
         
-        .overlay-description {
+         .overlay-description {
             color: #ecf0f1;
             margin-bottom: 20px;
             font-size: 16px;
             line-height: 1.6;
-            word-wrap: break-word; /* Evita que el texto largo se desborde */
-            overflow-wrap: break-word; /* Para mayor compatibilidad */
+            max-width: 100%;
+            word-break: break-word;
         }
         
         .overlay-links {
