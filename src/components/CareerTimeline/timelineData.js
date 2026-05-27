@@ -113,7 +113,7 @@ export const events = [
     description: [
       "Helped organize events with top companies like Revolut, Google, Oliver Wyman and Bankinter.",
       "Brought students closer to the world of Business Analytics through curated programming.",
-      "Moderated an industry roundtable and supported planning of events with 50+ attendees.",
+      "Moderated an industry roundtable (Revolut) and supported planning of events with 50+ attendees.",
     ],
   },
   {
