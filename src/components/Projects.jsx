@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiExternalLink, FiGithub, FiX } from "react-icons/fi";
+import { FiExternalLink, FiFileText, FiGithub, FiX } from "react-icons/fi";
 import { projects } from "../constants";
 
 const Projects = () => {
@@ -91,7 +91,7 @@ const Projects = () => {
             <button
               type="button"
               onClick={() => setSelectedProject(null)}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full border border-white/10 text-gray-300 hover:text-[#ffee10] hover:border-[#ffee10]/50 flex items-center justify-center transition"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#252525] border border-white/20 text-gray-200 hover:text-[#ffee10] hover:border-[#ffee10]/50 hover:bg-[#2e2e2e] flex items-center justify-center transition"
               aria-label="Close project details"
             >
               <FiX size={18} />
@@ -131,15 +131,33 @@ const Projects = () => {
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={selectedProject.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#ffee10] text-black rounded font-semibold hover:bg-yellow-300 transition"
-              >
-                <FiGithub size={17} />
-                GitHub
-              </a>
+              {selectedProject.githubDisabled ? (
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#2a2a2a] text-gray-600 border border-white/10 rounded font-semibold cursor-not-allowed select-none">
+                  <FiGithub size={17} />
+                  GitHub Soon
+                </span>
+              ) : (
+                <a
+                  href={selectedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#ffee10] text-black rounded font-semibold hover:bg-yellow-300 transition"
+                >
+                  <FiGithub size={17} />
+                  GitHub
+                </a>
+              )}
+              {selectedProject.pdf && (
+                <a
+                  href={selectedProject.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-[#ffee10]/50 text-[#ffee10] rounded font-semibold hover:bg-[#ffee10]/10 transition"
+                >
+                  <FiFileText size={17} />
+                  PDF
+                </a>
+              )}
               {selectedProject.live && (
                 <a
                   href={selectedProject.live}

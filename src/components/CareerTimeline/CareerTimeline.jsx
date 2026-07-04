@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { FiX } from "react-icons/fi";
 import * as TIMELINE from "./timelineData";
 import "./careerTimeline.css";
 
@@ -264,7 +265,7 @@ function DetailModal({ event, onClose }) {
   return (
     <div className="ct-modal-backdrop" onClick={onClose}>
       <div className={`ct-modal ct-lane-${event.lane}`} onClick={(e) => e.stopPropagation()}>
-        <button className="ct-modal-close" onClick={onClose} aria-label="Close">x</button>
+        <button className="ct-modal-close" onClick={onClose} aria-label="Close"><FiX size={18} /></button>
         <header className="ct-modal-head">
           {event.link
             ? <a href={event.link} target="_blank" rel="noreferrer" className="ct-modal-logo-link">{LogoEl}</a>

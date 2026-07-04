@@ -2,12 +2,49 @@ import feverProjectImage from "../assets/projects/fever_project_updated.png";
 import skillGapImage from "../assets/projects/skill_gap_video_portada.jpg";
 import dataJobOffersImage from "../assets/projects/data_ai_job_offers.png";
 import smartphonesImage from "../assets/projects/smartphones.jpeg";
+import mobilityTfgImage from "../assets/projects/mobility-tfg-head.png";
+import forecastingTfgImage from "../assets/projects/tfg-forecasting-head.png";
 
 export const aboutData = {
   description: `I recently graduated in Data Science and Telecommunications Engineering from UC3M, with exchange years at NTU Singapore and the University of Sydney, where I also did research. My background spans full ML/DL projects at IMDEA and The University of Sydney, cloud solutions architecture at AWS and Salesforce. I enjoy building things that are useful, clear, and technical enough to actually work.`
 };
 
 export const projects = [
+  {
+    name: "Adjusted by Text: A Neuro-Symbolic Approach to Metadata-Enriched Time Series Forecasting",
+    subtitle: "Neuro-symbolic multimodal time series forecasting",
+    description: "Bachelor thesis — neuro-symbolic forecasting model that conditions predictions on textual metadata, paired with a large multimodal macroeconomic dataset built from FRED.",
+    details: [
+      "Built a multimodal dataset from the FRED API: 194,442 monthly macroeconomic series enriched with expert-curated textual metadata.",
+      "Designed NeuroSym-CBF, a ~189K parameter architecture combining a patch-based time series encoder, frozen T5 metadata embeddings, and a symbolic forecasting head (trend, seasonality, intercept).",
+      "Introduced a TopK Sparse Autoencoder concept bottleneck modulated with FiLM, allowing concepts to be inspected, edited, or knocked out before the forecast is produced.",
+      "Benchmarked against Chronos 2, Chronos-bolt-base, TimesFM 200M and AutoETS — beating all in win rate with strong statistical significance (z ≈ 17.6)."
+    ],
+    technologies: ["Python", "PyTorch", "HuggingFace Transformers", "scikit-learn", "statsforecast", "Sparse Autoencoders", "FiLM", "FRED API", "LaTeX"],
+    link: null,
+    githubDisabled: true,
+    pdf: "/tfgs/neurosymbolic-with-metadata-timeseries-forecaster.pdf",
+    image: forecastingTfgImage,
+    accent: "TFG"
+  },
+    {
+    name: "Transformer-Based Continuous-Time Modeling of User Mobility in Campus WLAN",
+    subtitle: "WiFi mobility prediction & synthetic trace generation",
+    description: "Bachelor thesis — decoder-only Transformer trained on real campus WiFi logs to predict where users move next and when, then used to generate privacy-preserving synthetic mobility traces.",
+    details: [
+      "Processed ~6M authentication events from 17,395 devices across 280 access points (UC3M / IMDEA Networks).",
+      "Jointly predicts next location (AP) and continuous inter-event time (Δt), not just discrete steps.",
+      "Autoregressive synthetic trace generation evaluated against real distributions (KL divergence < 0.084).",
+      "Privacy validation via Membership Inference Attack — model leaks no individual data.",
+      "72.46% top-1 spatial accuracy on a real university campus dataset."
+    ],
+    technologies: ["Python", "PyTorch", "Transformer", "Pandas", "NumPy", "LaTeX"],
+    link: null,
+    githubDisabled: true,
+    pdf: "/tfgs/continuous-mobility-modeling-wlan.pdf",
+    image: mobilityTfgImage,
+    accent: "TFG"
+  },
   {
     name: "Fever Multi-Agent Recommendation System",
     subtitle: "Multi-agent leisure planning prototype",

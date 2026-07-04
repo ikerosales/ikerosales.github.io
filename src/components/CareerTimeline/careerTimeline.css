@@ -449,15 +449,15 @@ html, body {
 .ct-modal-close {
   position: absolute; top: 16px; right: 16px;
   width: 36px; height: 36px;
-  background: transparent;
-  border: none;
-  color: var(--ink-dim);
-  font-size: 22px;
+  background: #252525;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #d1d1d1;
   cursor: pointer;
   border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
   transition: all 150ms ease;
 }
-.ct-modal-close:hover { background: #1f1f1f; color: var(--ink); }
+.ct-modal-close:hover { background: #2e2e2e; border-color: rgba(255,238,16,0.45); color: var(--ink); }
 .ct-modal-head {
   display: flex; gap: 20px;
   align-items: flex-start;
