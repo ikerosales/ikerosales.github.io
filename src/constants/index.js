@@ -4,7 +4,7 @@ import dataJobOffersImage from "../assets/projects/data_ai_job_offers.png";
 import smartphonesImage from "../assets/projects/smartphones.jpeg";
 
 export const aboutData = {
-  description: `I'm studying Data Science and Telecommunications Engineering at UC3M, currently on exchange at the University of Sydney after a year at NTU Singapore. I've worked on machine learning, deep learning and cloud projects through IMDEA, AWS, and university projects. I am proactive, resourceful and enjoy building practical things: useful, clear, and technical enough to actually work.`
+  description: `I recently graduated in Data Science and Telecommunications Engineering from UC3M, with exchange years at NTU Singapore and the University of Sydney, where I also did research. My background spans full ML/DL projects at IMDEA and The University of Sydney, cloud solutions architecture at AWS and Salesforce. I enjoy building things that are useful, clear, and technical enough to actually work.`
 };
 
 export const projects = [

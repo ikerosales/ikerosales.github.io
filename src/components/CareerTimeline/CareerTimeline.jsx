@@ -35,8 +35,8 @@ export default function CareerTimeline() {
 
     return chronological.filter((event) => {
       const startM = event.start.y * 12 + event.start.m;
-      const endM = event.end.y * 12 + event.end.m;
-      return startM <= nowMonths && (event.ongoing || endM > nowMonths);
+      const endM = event.ongoing ? Infinity : event.end.y * 12 + event.end.m;
+      return startM <= nowMonths && endM > nowMonths;
     });
   }, [chronological, NOW]);
 

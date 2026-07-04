@@ -2,11 +2,13 @@ import awsLogo from "../../assets/experiences/aws.png";
 import imdeaLogo from "../../assets/experiences/imdea.jpg";
 import bauc3mLogo from "../../assets/experiences/bauc3m.png";
 import ntuossLogo from "../../assets/experiences/ntuoss.png";
+import salesforceLogo from "../../assets/experiences/salesforce.jpeg";
 import uc3mLogo from "../../assets/education/Logo_UC3M.png";
 import ntuLogo from "../../assets/education/nanyang-technological-university.png";
 import sydneyLogo from "../../assets/education/university-of-sydney.png";
 
-export const NOW = { y: 2026, m: 5 };
+const _now = new Date();
+export const NOW = { y: _now.getFullYear(), m: _now.getMonth() + 1 };
 export const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export const fmt = (y, m) => `${MONTHS[m - 1]} ${y}`;
@@ -33,7 +35,7 @@ export const events = [
     role: "Dual Bachelor - Data Science & Telecommunications Engineering",
     start: { y: 2021, m: 1 },
     end: { y: 2026, m: 6 },
-    ongoing: true,
+    ongoing: false,
     location: "Madrid",
     country: "es",
     countryName: "Spain",
@@ -142,7 +144,7 @@ export const events = [
     role: "Head of Events & Community",
     start: { y: 2025, m: 7 },
     end: { y: 2026, m: 5 },
-    ongoing: true,
+    ongoing: false,
     location: "Madrid",
     country: "es",
     countryName: "Spain",
@@ -160,8 +162,8 @@ export const events = [
     shortName: "USYD - Exchange Semester",
     role: "Exchange Semester - Data Science",
     start: { y: 2026, m: 2 },
-    end: { y: 2026, m: 7 },
-    ongoing: true,
+    end: { y: 2026, m: 6 },
+    ongoing: false,
     location: "Sydney",
     country: "au",
     countryName: "Australia",
@@ -180,13 +182,30 @@ export const events = [
     role: "AI Research Intern",
     start: { y: 2026, m: 2 },
     end: { y: 2026, m: 5 },
-    ongoing: true,
+    ongoing: false,
     location: "Sydney",
     country: "au",
     countryName: "Australia",
     logo: sydneyLogo,
     description: [
       "Research in multimodal AI for financial-indicator forecasting with Dr. Pablo Montero-Manso.",
+    ],
+  },
+  {
+    id: "car-salesforce",
+    lane: "career",
+    institution: "Salesforce",
+    shortName: "Salesforce",
+    role: "Solution Engineer Intern",
+    start: { y: 2026, m: 6 },
+    ongoing: true,
+    location: "Madrid",
+    country: "es",
+    countryName: "Spain",
+    logo: salesforceLogo,
+    description: [
+      "Specializing in Agentforce and enterprise AI solutions across the Salesforce stack.",
+      "Developing expertise in Technical Pre-Sales, Solution Engineering, AI Agents, CRM and Solution Architecture.",
     ],
   },
 ];
