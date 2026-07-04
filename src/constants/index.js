@@ -13,7 +13,7 @@ export const projects = [
   {
     name: "Adjusted by Text: A Neuro-Symbolic Approach to Metadata-Enriched Time Series Forecasting",
     subtitle: "Neuro-symbolic multimodal time series forecasting",
-    description: "Bachelor thesis — neuro-symbolic forecasting model that conditions predictions on textual metadata, paired with a large multimodal macroeconomic dataset built from FRED.",
+    description: "Bachelor thesis : Neuro-symbolic forecasting model that conditions predictions on textual metadata, paired with a large multimodal macroeconomic dataset built from FRED.",
     details: [
       "Built a multimodal dataset from the FRED API: 194,442 monthly macroeconomic series enriched with expert-curated textual metadata.",
       "Designed NeuroSym-CBF, a ~189K parameter architecture combining a patch-based time series encoder, frozen T5 metadata embeddings, and a symbolic forecasting head (trend, seasonality, intercept).",
@@ -30,7 +30,7 @@ export const projects = [
     {
     name: "Transformer-Based Continuous-Time Modeling of User Mobility in Campus WLAN",
     subtitle: "WiFi mobility prediction & synthetic trace generation",
-    description: "Bachelor thesis — decoder-only Transformer trained on real campus WiFi logs to predict where users move next and when, then used to generate privacy-preserving synthetic mobility traces.",
+    description: "Bachelor thesis : Decoder-only Transformer-based model trained on real campus WiFi logs to predict where users move next and when, then used to generate privacy-preserving synthetic mobility traces.",
     details: [
       "Processed ~6M authentication events from 17,395 devices across 280 access points (UC3M / IMDEA Networks).",
       "Jointly predicts next location (AP) and continuous inter-event time (Δt), not just discrete steps.",
