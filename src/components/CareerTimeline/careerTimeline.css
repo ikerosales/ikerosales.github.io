@@ -491,6 +491,16 @@ html, body {
   margin-top: 10px;
   letter-spacing: 0.06em;
 }
+.ct-modal-logo-link { display: contents; cursor: pointer; }
+.ct-modal-logo-link:hover .ct-modal-logo { outline: 2px solid var(--lane); outline-offset: 2px; }
+
+.ct-modal-title-link { color: inherit; text-decoration: none; }
+.ct-modal-title-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ct-ext-icon { font-size: 14px; color: var(--ink-dim); }
+
+.ct-inline-link { color: var(--lane); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+.ct-inline-link:hover { opacity: 0.75; }
+
 .ct-modal-body { padding-left: 18px; margin: 0; }
 .ct-modal-body li {
   font-size: 14px;

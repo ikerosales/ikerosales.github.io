@@ -40,6 +40,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: uc3mLogo,
+    link: "https://www.linkedin.com/school/universidad-carlos-iii-de-madrid/",
     description: [
       "Dual engineering degree across data science and telecommunications. 5.5 years, 372 ECTS.",
       "Combines statistics, machine learning, signal processing and communications systems.",
@@ -58,6 +59,7 @@ export const events = [
     country: "sg",
     countryName: "Singapore",
     logo: ntuLogo,
+    link: "https://www.linkedin.com/school/nanyang-technological-university/",
     description: [
       "Full academic year abroad through UC3M's exchange programme.",
       "Courses on Deep Learning, Analog Electronics, Cybersecurity, Big Data Management and more.",
@@ -76,6 +78,7 @@ export const events = [
     country: "sg",
     countryName: "Singapore",
     logo: ntuossLogo,
+    link: "https://www.linkedin.com/company/ntuoss",
     description: [
       "Implemented and compared different ML and DL algorithms.",
       "Reached 98% accuracy on classification of communication-network attacks.",
@@ -94,6 +97,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: imdeaLogo,
+    link: "https://networks.imdea.org/",
     description: [
       "Research on Transformer-based models for communication networks.",
       "Built data pipelines and evaluated language-model approaches on real campus wifi data.",
@@ -112,6 +116,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: bauc3mLogo,
+    link: "https://www.linkedin.com/company/bauc3m",
     description: [
       "Helped organize events with top companies like Revolut, Google, Oliver Wyman and Bankinter.",
       "Brought students closer to the world of Business Analytics through curated programming.",
@@ -130,6 +135,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: awsLogo,
+    link: "https://www.linkedin.com/company/amazon-web-services/",
     description: [
       "Designed scalable, secure cloud architectures alongside the Solutions Architect team.",
       "Supported customers through AWS adoption: discovery to deployment.",
@@ -149,6 +155,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: bauc3mLogo,
+    link: "https://www.linkedin.com/company/bauc3m",
     description: [
       "Leading events with firms such as Microsoft, BlackRock and Revolut, from focused workshops to larger sessions with 120+ attendees.",
       "Managing a team of 4 across planning, coordination and event delivery.",
@@ -168,10 +175,15 @@ export const events = [
     country: "au",
     countryName: "Australia",
     logo: sydneyLogo,
+    link: "https://www.linkedin.com/school/university-of-sydney/",
     description: [
       "Exchange semester at The University of Sydney.",
       "Coursework on Time Series Forecasting and Mobile Networks among others.",
       "Studying in parallel with a research internship at the same university.",
+      [
+        { text: "Ranked #18 globally — " },
+        { text: "QS World University Rankings 2025", href: "https://www.topuniversities.com/universities/university-sydney" },
+      ],
     ],
   },
   {
@@ -187,8 +199,13 @@ export const events = [
     country: "au",
     countryName: "Australia",
     logo: sydneyLogo,
+    link: "https://www.linkedin.com/school/university-of-sydney/",
     description: [
-      "Research in multimodal AI for financial-indicator forecasting with Dr. Pablo Montero-Manso.",
+      [
+        { text: "Research in multimodal AI for financial-indicator forecasting with " },
+        { text: "Dr. Pablo Montero-Manso", href: "https://profiles.sydney.edu.au/pablo.monteromanso"}, // TODO: add Pablo's USYD profile URL
+        { text: "." },
+      ],
     ],
   },
   {
@@ -203,6 +220,7 @@ export const events = [
     country: "es",
     countryName: "Spain",
     logo: salesforceLogo,
+    link: "https://www.linkedin.com/company/salesforce/",
     description: [
       "Specializing in Agentforce and enterprise AI solutions across the Salesforce stack.",
       "Developing expertise in Technical Pre-Sales, Solution Engineering, AI Agents, CRM and Solution Architecture.",

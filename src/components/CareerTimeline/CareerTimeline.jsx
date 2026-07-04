@@ -229,6 +229,19 @@ function NowMarker({ laneRanges }) {
   );
 }
 
+function renderBullet(item) {
+  if (typeof item === "string") return item;
+  return item.map((seg, i) =>
+    seg.href ? (
+      <a key={i} href={seg.href} target="_blank" rel="noreferrer" className="ct-inline-link">
+        {seg.text}
+      </a>
+    ) : (
+      <span key={i}>{seg.text}</span>
+    )
+  );
+}
+
 function DetailModal({ event, onClose }) {
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -242,18 +255,29 @@ function DetailModal({ event, onClose }) {
   }, [onClose]);
 
   const laneLabel = TIMELINE.lanes[event.lane].label;
+  const LogoEl = (
+    <div className="ct-modal-logo">
+      {event.logo ? <img src={event.logo} alt={event.institution} /> : <span>{event.initials}</span>}
+    </div>
+  );
 
   return (
     <div className="ct-modal-backdrop" onClick={onClose}>
       <div className={`ct-modal ct-lane-${event.lane}`} onClick={(e) => e.stopPropagation()}>
         <button className="ct-modal-close" onClick={onClose} aria-label="Close">x</button>
         <header className="ct-modal-head">
-          <div className="ct-modal-logo">
-            {event.logo ? <img src={event.logo} alt={event.institution} /> : <span>{event.initials}</span>}
-          </div>
+          {event.link
+            ? <a href={event.link} target="_blank" rel="noreferrer" className="ct-modal-logo-link">{LogoEl}</a>
+            : LogoEl}
           <div className="ct-modal-head-text">
             <div className={`ct-card-pill ct-lane-${event.lane}`}>{laneLabel}</div>
-            <h2>{event.institution}</h2>
+            <h2>
+              {event.link
+                ? <a href={event.link} target="_blank" rel="noreferrer" className="ct-modal-title-link">
+                    {event.institution}<span className="ct-ext-icon"> ↗</span>
+                  </a>
+                : event.institution}
+            </h2>
             <div className="ct-modal-role">{event.role}</div>
             <div className="ct-modal-meta mono">
               {TIMELINE.periodLabel(event)} - {TIMELINE.durationLabel(event)} - {event.location}, {event.countryName}
@@ -261,7 +285,7 @@ function DetailModal({ event, onClose }) {
           </div>
         </header>
         <ul className="ct-modal-body">
-          {event.description.map((bullet) => <li key={bullet}>{bullet}</li>)}
+          {event.description.map((bullet, i) => <li key={i}>{renderBullet(bullet)}</li>)}
         </ul>
       </div>
     </div>
