@@ -211,7 +211,7 @@ export const events = [
 ];
 
 export const chronological = [...events].sort((a, b) => {
-  const dt = (a.start.y - b.start.y) * 12 + (a.start.m - b.start.m);
+  const dt = (b.start.y - a.start.y) * 12 + (b.start.m - a.start.m);
   if (dt !== 0) return dt;
 
   const order = { education: 0, career: 1, community: 2 };

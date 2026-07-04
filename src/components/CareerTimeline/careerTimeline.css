@@ -375,15 +375,15 @@ html, body {
   margin-top: 0;
 }
 .ct-now-mark .ct-gutter { min-height: 80px; }
-.ct-spine-now .ct-spine-line { top: 0; bottom: auto; height: 50%; }
+.ct-spine-now .ct-spine-line { top: auto; bottom: 0; height: 50%; }
 .ct-spine-education.is-ongoing > .ct-spine-line {
-  background: linear-gradient(to bottom, var(--ln-edu) 0, var(--ln-edu) 80%, transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--ln-edu) 50%, var(--ln-edu) 100%);
 }
 .ct-spine-career.is-ongoing > .ct-spine-line {
-  background: linear-gradient(to bottom, var(--ln-car) 0, var(--ln-car) 80%, transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--ln-car) 50%, var(--ln-car) 100%);
 }
 .ct-spine-community.is-ongoing > .ct-spine-line {
-  background: linear-gradient(to bottom, var(--ln-com) 0, var(--ln-com) 80%, transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--ln-com) 50%, var(--ln-com) 100%);
 }
 .ct-stop-now {
   position: absolute;

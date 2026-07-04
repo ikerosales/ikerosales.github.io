@@ -58,6 +58,7 @@ export default function CareerTimeline() {
       <Header activeNow={activeNow} onOpen={setOpened} />
 
       <ol className="ct-list">
+        <NowMarker laneRanges={laneRanges} />
         {chronological.map((event, idx) => {
           const prev = idx > 0 ? chronological[idx - 1] : null;
           const isYearBreak = !prev || prev.start.y !== event.start.y;
@@ -76,7 +77,6 @@ export default function CareerTimeline() {
             </React.Fragment>
           );
         })}
-        <NowMarker laneRanges={laneRanges} />
       </ol>
 
       {openedEvent && <DetailModal event={openedEvent} onClose={() => setOpened(null)} />}
@@ -149,9 +149,9 @@ function EventRow({ event, idx, laneRanges, lanesByName, abroad, onOpen }) {
           if (!range) return <span key={laneId} className="ct-spine ct-spine-empty" />;
 
           const isBefore = idx < range.first;
-          const isAfter = range.ongoing ? false : idx > range.last;
-          const isFirst = idx === range.first;
-          const isLast = !range.ongoing && idx === range.last;
+          const isAfter = idx > range.last;
+          const isFirst = idx === range.first && !event.ongoing;
+          const isLast = idx === range.last;
           const hasStop = laneId === event.lane;
 
           return (
