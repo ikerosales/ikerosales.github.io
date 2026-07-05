@@ -33,7 +33,7 @@ export const events = [
     institution: "Universidad Carlos III de Madrid",
     shortName: "UC3M",
     role: "Dual Bachelor - Data Science & Telecommunications Engineering",
-    start: { y: 2021, m: 1 },
+    start: { y: 2021, m: 9},
     end: { y: 2026, m: 6 },
     ongoing: false,
     location: "Madrid",
