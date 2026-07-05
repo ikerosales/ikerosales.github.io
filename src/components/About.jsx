@@ -6,19 +6,19 @@ import myPic from "../assets/my_pic.jpg";
 
 const skills = [
   {
-    title: "Machine Learning",
+    title: "ML & Deep Learning",
     icon: <FaRobot size={40} className="text-[#ffee10]" />,
-    desc: "Applied Machine Learning, forecasting and predictive systems",
+    chips: ["PyTorch", "scikit-learn", "HuggingFace", "statsforecast", "XGBoost", "spaCy", "Pandas", "NumPy", "Matplotlib", "R"],
   },
   {
-    title: "Cloud",
+    title: "Cloud & Solutions",
     icon: <FaCloud size={40} className="text-[#ffee10]" />,
-    desc: "AWS, architecture basics, and cloud projects.",
+    chips: ["AWS", "Salesforce", "Agentforce", "CRM", "Cloud Architecture", "Solution Engineering"],
   },
   {
-    title: "LLMs",
+    title: "LLMs & Agents",
     icon: <FaBrain size={40} className="text-[#ffee10]" />,
-    desc: "LLM workflows, multi-agent systems, and applied NLP.",
+    chips: ["OpenAI Agents SDK", "Multi-agent Systems", "RAGAS", "LLM-as-a-Judge", "RAG", "NLP"],
   },
 ];
 
@@ -81,9 +81,9 @@ const CardGlass = ({ skill, i }) => {
         transition={{ repeat: Infinity, duration: 3 }}
         style={{ opacity: 0.10 }}
       />
-      <div className="bg-[#181818]/90 rounded-2xl py-8 px-6 min-h-[220px] flex flex-col justify-evenly items-center w-full relative z-10">
+      <div className="bg-[#181818]/90 rounded-2xl py-8 px-6 min-h-[220px] flex flex-col items-center w-full relative z-10 gap-4">
         <motion.div
-          className="mb-4 flex items-center justify-center"
+          className="flex items-center justify-center"
           style={{ x: iconX, y: iconY }}
           animate={iconHover ? { scale: [1, 1.18, 0.95, 1.1, 1], filter: "drop-shadow(0 0 16px #ffee10)" } : { scale: 1, filter: "none" }}
           transition={{ type: "spring", stiffness: 400, damping: 12, duration: 0.7 }}
@@ -92,12 +92,16 @@ const CardGlass = ({ skill, i }) => {
         >
           {skill.icon}
         </motion.div>
-        <h3 className="text-[#ffee10] text-[22px] font-bold text-center mb-2 drop-shadow-lg">
+        <h3 className="text-[#ffee10] text-[20px] font-bold text-center drop-shadow-lg">
           {skill.title}
         </h3>
-        <p className="text-gray-200 text-base text-center opacity-90 font-medium">
-          {skill.desc}
-        </p>
+        <div className="flex flex-wrap gap-1.5 justify-center">
+          {skill.chips.map(chip => (
+            <span key={chip} className="text-xs px-2 py-0.5 rounded border border-[#ffee10]/25 bg-[#ffee10]/8 text-gray-200 font-mono">
+              {chip}
+            </span>
+          ))}
+        </div>
       </div>
       <motion.div
         className="absolute -inset-1 rounded-2xl pointer-events-none z-0"

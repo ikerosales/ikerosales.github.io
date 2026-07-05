@@ -19,13 +19,13 @@ const CONTACTS = [
   },
   {
     name: "Email",
-    url: "mailto:ikerrosalesa@gmail.com",
+    url: "mailto:iker251203@gmail.com",
     icon: emailIcon,
-    label: "ikerrosalesa@gmail.com",
+    label: "iker251203@gmail.com",
   },
   {
     name: "CV",
-    url: "CV_Iker_Rosales_03_2026.pdf",
+    url: "/CV_Iker_Rosales_03_2026.pdf",
     icon: cvIcon,
     label: "Download PDF",
   },
@@ -40,7 +40,7 @@ const Contact = () => {
           <a
             key={contact.name + "-icon"}
             href={contact.url}
-            target={contact.name === "CV" ? "_blank" : undefined}
+            target={contact.name === "Email" ? undefined : "_blank"}
             rel="noopener noreferrer"
             className="relative group"
           >

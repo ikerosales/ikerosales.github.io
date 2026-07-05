@@ -2,6 +2,19 @@ import React, { useEffect, useState } from "react";
 import { FiExternalLink, FiFileText, FiGithub, FiX } from "react-icons/fi";
 import { projects } from "../constants";
 
+function renderDetail(item) {
+  if (typeof item === "string") return item;
+  return item.map((seg, i) =>
+    seg.href ? (
+      <a key={i} href={seg.href} target="_blank" rel="noreferrer" className="text-[#ffee10] underline underline-offset-2 decoration-[#ffee10]/50 hover:opacity-75">
+        {seg.text}
+      </a>
+    ) : (
+      <span key={i}>{seg.text}</span>
+    )
+  );
+}
+
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -26,7 +39,7 @@ const Projects = () => {
       <div className="w-full max-w-5xl mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-[#ffee10]">Featured Projects</h2>
         <p className="mt-3 max-w-2xl text-gray-300 text-sm md:text-base leading-relaxed">
-          Four projects I can actually talk about in detail, from the repos and without dressing them up.
+          Projects I can actually talk about in detail, from the repos and without dressing them up.
         </p>
       </div>
 
@@ -114,10 +127,10 @@ const Projects = () => {
             </div>
 
             <ul className="mt-6 space-y-3">
-              {selectedProject.details.map((detail) => (
-                <li key={detail} className="text-sm md:text-base text-gray-300 leading-relaxed flex gap-3">
+              {selectedProject.details.map((detail, i) => (
+                <li key={i} className="text-sm md:text-base text-gray-300 leading-relaxed flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#ffee10] shrink-0" />
-                  <span>{detail}</span>
+                  <span>{renderDetail(detail)}</span>
                 </li>
               ))}
             </ul>

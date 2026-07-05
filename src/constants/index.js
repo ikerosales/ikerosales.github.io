@@ -18,7 +18,15 @@ export const projects = [
       "Built a multimodal dataset from the FRED API: 194,442 monthly macroeconomic series enriched with expert-curated textual metadata.",
       "Designed NeuroSym-CBF, a ~189K parameter architecture combining a patch-based time series encoder, frozen T5 metadata embeddings, and a symbolic forecasting head (trend, seasonality, intercept).",
       "Introduced a TopK Sparse Autoencoder concept bottleneck modulated with FiLM, allowing concepts to be inspected, edited, or knocked out before the forecast is produced.",
-      "Benchmarked against Chronos 2, Chronos-bolt-base, TimesFM 200M and AutoETS — beating all in win rate with strong statistical significance (z ≈ 17.6)."
+      [
+        { text: "Benchmarked against " },
+        { text: "Chronos 2", href: "https://huggingface.co/amazon/chronos-2" },
+        { text: " (Amazon), " },
+        { text: "Chronos-bolt-base", href: "https://huggingface.co/amazon/chronos-bolt-base" },
+        { text: " (Amazon), " },
+        { text: "TimesFM 200M", href: "https://huggingface.co/google/timesfm-1.0-200m" },
+        { text: " (Google) and AutoETS, beating all in Win Rate, MAE, and MASE across 5 context for an horizon of 18 months." },
+      ]
     ],
     technologies: ["Python", "PyTorch", "HuggingFace Transformers", "scikit-learn", "statsforecast", "Sparse Autoencoders", "FiLM", "FRED API", "LaTeX"],
     link: null,
