@@ -1,4 +1,11 @@
-# 🌐 Portfolio Personal - ikerosales
-My personal website and portfolio built with **React**, **Vite**, and **Tailwind CSS**, hosted on GitHub Pages.
+# Personal Portfolio - ikerosales
 
-**Web en vivo:** [ikerosales.github.io](https://ikerosales.github.io)
+My personal website. Built from scratch with React, Vite, Tailwind CSS, and Framer Motion.
+
+Live at **[ikerosales.github.io](https://ikerosales.github.io)**
+
+## Stack
+
+- React 18 + Vite
+- Tailwind CSS
+- Framer Motion
