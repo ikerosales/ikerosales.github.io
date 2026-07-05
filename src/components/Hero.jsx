@@ -48,8 +48,8 @@ const Hero = () => {
             Solution Engineering @ Salesforce | UC3M · USYD · NTU | Ex-AWS
           </h2>
           <p className="text-lg md:text-xl text-gray-200 max-w-2xl mb-8">
-            I like building useful stuff around <span className="text-[#ffee10] font-semibold">AI</span>, <span className="text-[#ffee10] font-semibold">Cloud</span> and <span className="text-[#ffee10] font-semibold">Telecommunications</span>: from multi-agent systems to real ML projects and network research.<br className="hidden md:block" />
-            Graduated in Data Science & Telecommunications, with a background in ML research and cloud. Currently working in Solution Engineering and enterprise AI.
+            I like building useful stuff around <span className="text-[#ffee10] font-semibold">AI</span>, <span className="text-[#ffee10] font-semibold">Cloud</span> and <span className="text-[#ffee10] font-semibold">Telecommunications</span>.<br className="hidden md:block" />
+            Graduated in Data Science & Telecommunications, with a background in ML research and cloud.
           </p>
         </motion.div>
       </div>
