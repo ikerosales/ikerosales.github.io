@@ -11,13 +11,27 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const observers = [];
+    NAV_LINKS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+    return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
   return (
@@ -40,9 +54,13 @@ const Navbar = () => {
             <li key={link.id}>
               <a
                 href={`#${link.id}`}
-                className="text-gray-200 hover:text-[#ffee10] font-medium text-base transition px-2 py-1 rounded"
+                className={`relative font-medium text-base transition px-2 py-1 rounded
+                  ${activeSection === link.id ? "text-[#ffee10]" : "text-gray-200 hover:text-[#ffee10]"}`}
               >
                 {link.label}
+                {activeSection === link.id && (
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#ffee10]" />
+                )}
               </a>
             </li>
           ))}
