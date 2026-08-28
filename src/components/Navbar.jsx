@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import headIcon from "../assets/icons/head-icon.png";
 
 const NAV_LINKS = [
   { id: "about", label: "About" },
@@ -43,7 +42,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <img
-            src={headIcon}
+            src="/head-icon.png"
             alt="Iker Rosales logo"
             className="w-9 h-9 rounded-full border-2 border-[#ffee10] bg-[#222] shadow group-hover:scale-105 transition"
           />
