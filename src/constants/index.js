@@ -6,7 +6,7 @@ import mobilityTfgImage from "../assets/projects/mobility-tfg-head.png";
 import forecastingTfgImage from "../assets/projects/tfg-forecasting-head.png";
 
 export const aboutData = {
-  description: `I recently graduated in Data Science and Telecommunications Engineering from UC3M, with exchange years at NTU Singapore and the University of Sydney, where I also did research. My background spans full ML/DL projects at IMDEA and The University of Sydney, cloud solutions architecture at AWS and Salesforce. I enjoy building things that are useful, clear, and technical enough to actually work.`
+  description: `I'm currently pursuing an MSc in Artificial Intelligence at Universidad Politécnica de Madrid while working as a Solution Engineer at Salesforce. I recently graduated in Data Science and Telecommunications Engineering from UC3M, with exchange years at NTU Singapore and the University of Sydney, where I also did research. My background spans full ML/DL projects at IMDEA and The University of Sydney, cloud solutions architecture at AWS and Salesforce. I enjoy building things that are useful, clear, and technical enough to actually work.`
 };
 
 export const projects = [
@@ -29,8 +29,7 @@ export const projects = [
       ]
     ],
     technologies: ["Python", "PyTorch", "HuggingFace Transformers", "scikit-learn", "statsforecast", "Sparse Autoencoders", "FiLM", "FRED API", "LaTeX"],
-    link: null,
-    githubDisabled: true,
+    link: "https://github.com/ikerosales/NeuroSym-CBF",
     pdf: "/tfgs/neurosymbolic-with-metadata-timeseries-forecaster.pdf",
     image: forecastingTfgImage,
     accent: "TFG"

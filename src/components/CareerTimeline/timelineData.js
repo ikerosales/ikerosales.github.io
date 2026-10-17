@@ -3,6 +3,7 @@ import imdeaLogo from "../../assets/experiences/imdea.jpg";
 import bauc3mLogo from "../../assets/experiences/bauc3m.png";
 import ntuossLogo from "../../assets/experiences/ntuoss.png";
 import salesforceLogo from "../../assets/experiences/salesforce.jpeg";
+import upmLogo from "../../assets/education/upm.png";
 import uc3mLogo from "../../assets/education/Logo_UC3M.png";
 import ntuLogo from "../../assets/education/nanyang-technological-university.png";
 import sydneyLogo from "../../assets/education/university-of-sydney.png";
@@ -27,6 +28,23 @@ export const periodLabel = (stop) =>
   `${fmt(stop.start.y, stop.start.m)} - ${stop.ongoing ? "Present" : fmt(stop.end.y, stop.end.m)}`;
 
 export const events = [
+  {
+    id: "edu-upm",
+    lane: "education",
+    institution: "Universidad Politécnica de Madrid",
+    shortName: "UPM",
+    role: "MSc in Artificial Intelligence",
+    start: { y: 2026, m: 9 },
+    ongoing: true,
+    location: "Madrid",
+    country: "es",
+    countryName: "Spain",
+    logo: upmLogo,
+    link: "https://www.upm.es",
+    description: [
+      "Master's degree in advanced concepts of Artificial Intelligence, taken alongside my role at Salesforce.",
+    ],
+  },
   {
     id: "edu-uc3m",
     lane: "education",
