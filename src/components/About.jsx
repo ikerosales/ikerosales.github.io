@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { aboutData } from "../constants";
 import { FaCloud, FaRobot, FaBrain } from "react-icons/fa";
-import myPic from "../assets/my_pic.jpg";
+import myPic from "../assets/my_pic.webp";
 
 const skills = [
   {
@@ -137,6 +137,8 @@ const About = () => {
             <img
               src={myPic}
               alt="Iker Rosales"
+              loading="lazy"
+              decoding="async"
               className="absolute h-[168%] w-auto max-w-none"
               style={{
                 left: "56%",

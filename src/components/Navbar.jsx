@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 group">
           <img
-            src="/head-icon.png"
+            src="/head-icon.webp"
             alt="Iker Rosales logo"
             className="w-9 h-9 rounded-full border-2 border-[#ffee10] bg-[#222] shadow group-hover:scale-105 transition"
           />

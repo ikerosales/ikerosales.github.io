@@ -92,7 +92,7 @@ function Header({ activeNow, onOpen }) {
               onClick={() => onOpen(event.id)}
             >
               <div className="ct-now-card-logo">
-                {event.logo ? <img src={event.logo} alt={event.institution} /> : <span>{event.initials}</span>}
+                {event.logo ? <img src={event.logo} alt={event.institution} loading="lazy" decoding="async" /> : <span>{event.initials}</span>}
               </div>
               <div className="ct-now-card-text">
                 <div className="ct-now-card-name">{event.shortName}</div>
@@ -485,7 +485,7 @@ function Journey({ onOpen }) {
                     </span>
                     <span className="cj-band-spark" aria-hidden="true" />
                     <span className="cj-badge" aria-hidden="true">
-                      {a.logo ? <img src={a.logo} alt="" /> : <span>{a.initials}</span>}
+                      {a.logo ? <img src={a.logo} alt="" decoding="async" /> : <span>{a.initials}</span>}
                     </span>
                   </button>
                   {!a.promotedFrom && (
@@ -850,7 +850,7 @@ function Manifest({ acts, month, onOpen, hintRef }) {
               >
                 <button type="button" className={`cj-chip ct-lane-${a.lane}`} onClick={() => onOpen(a.id)}>
                   <span className="cj-chip-logo">
-                    {a.logo ? <img src={a.logo} alt="" /> : <span>{a.initials}</span>}
+                    {a.logo ? <img src={a.logo} alt="" loading="lazy" decoding="async" /> : <span>{a.initials}</span>}
                   </span>
                   <span className="cj-chip-text">
                     <span className="cj-chip-role">{a.role}</span>
@@ -898,7 +898,7 @@ function DetailModal({ event, onClose }) {
   const laneLabel = TIMELINE.lanes[event.lane].label;
   const LogoEl = (
     <div className="ct-modal-logo">
-      {event.logo ? <img src={event.logo} alt={event.institution} /> : <span>{event.initials}</span>}
+      {event.logo ? <img src={event.logo} alt={event.institution} loading="lazy" decoding="async" /> : <span>{event.initials}</span>}
     </div>
   );
 
