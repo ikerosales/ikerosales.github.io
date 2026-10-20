@@ -550,8 +550,8 @@ function Journey({ onOpen }) {
 
         <Manifest acts={acts} month={month} onOpen={onOpen} hintRef={hintRef} />
 
-        <button type="button" className="cj-skip" ref={skipRef} onClick={skipToProjects}>
-          Skip to Projects
+        <button type="button" className="cj-skip" ref={skipRef} onClick={skipToProjects} aria-label="Skip to Projects">
+          <span className="cj-skip-label">Skip to Projects</span>
           <span className="cj-skip-arrow" aria-hidden="true">
             <FiArrowDown />
           </span>

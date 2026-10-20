@@ -238,7 +238,7 @@ html, body {
   transform: translateX(calc(-100% - 3px));
 }
 
-.cj-today {
+.cj .cj-today {
   appearance: none;
   display: inline-flex; align-items: center; gap: 6px;
   border: 1px solid #262626;
@@ -567,7 +567,8 @@ html, body {
 .cj-stage.is-scrubbing .cj-head::before { background: linear-gradient(#fff, rgba(255,255,255,.35)); }
 
 /* way out of the pinned journey */
-.cj-skip {
+/* .cj prefix: Tailwind preflight resets [type="button"] backgrounds with equal specificity and loads later */
+.cj .cj-skip {
   position: absolute;
   right: 28px;
   bottom: 16px;
@@ -740,6 +741,9 @@ html, body {
   background: var(--lane);
 }
 .cj-chip:hover { border-color: color-mix(in srgb, var(--lane) 55%, transparent); background: #161616; transform: translateY(-1px); }
+/* background only, with extra specificity: Tailwind preflight clears [type="button"] backgrounds */
+.cj .cj-chip { background: #141414; }
+.cj .cj-chip:hover { background: #161616; }
 .cj-chip:focus-visible { outline: 2px solid var(--lane); outline-offset: 2px; }
 .cj-chip-logo {
   width: 44px; height: 44px;
@@ -927,7 +931,7 @@ html, body {
   }
   .cj-legend { grid-column: 1 / -1; grid-row: 1; gap: 12px; font-size: 10px; flex-wrap: wrap; }
   .cj-legend .cj-key { display: none; }
-  .cj-today { padding: 6px 10px; font-size: 10px; }
+  .cj .cj-today { padding: 0 12px; min-height: 40px; font-size: 10px; }
 
   .cj-band-txt { font-size: 11.5px; }
   .cj-pill { font-size: 10px; padding: 3px 8px; }
@@ -950,8 +954,10 @@ html, body {
   .cj-m-count { padding-bottom: 6px; }
   .cj-m-changes { display: none; }
   .cj-m-list { grid-template-columns: 1fr; gap: 8px; padding-bottom: 56px; }
-  .cj-skip { right: 16px; bottom: 12px; font-size: 10px; padding: 6px 6px 6px 13px; }
-  .cj-skip-arrow { width: 24px; height: 24px; }
+  /* phones: a compact round button so it never covers the cards */
+  .cj .cj-skip { right: 14px; bottom: 14px; width: 48px; height: 48px; padding: 0; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+  .cj-skip-label { display: none; }
+  .cj-skip-arrow { width: 34px; height: 34px; }
   .cj-chip { grid-template-columns: 38px minmax(0, 1fr); gap: 10px; padding: 9px 12px; border-radius: 12px; }
   .cj-chip-logo { width: 38px; height: 38px; border-radius: 9px; }
   .cj-chip-role { font-size: 13.5px; }
