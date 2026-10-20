@@ -258,8 +258,10 @@ function Journey({ onOpen }) {
           n.txtW = n.band.querySelector(".cj-band-txt").scrollWidth;
           n.band.classList.toggle("is-short", n.txtW + pad + 12 > w);
         }
-        // stop before the band's end so the label never runs into the next stage's logo
-        const shift = clamp(visibleLeft - (left + pad), 0, Math.max(0, w - pad - D.badge / 2 - 14 - n.txtW));
+        // the logo (with its label right after it) sticks to the visible left edge for as long as any
+        // of the band is on screen; the logo wins over the label: if the label no longer fits, the
+        // band's own overflow clips it rather than letting the logo slide away
+        const shift = clamp(visibleLeft + 4 - (left - D.badge / 2), 0, Math.max(0, w - D.badge));
         n.band.style.setProperty("--shift", `${shift.toFixed(1)}px`);
         n.band.style.setProperty("--p", `${clamp(cur - left, 0, w).toFixed(1)}px`);
         n.band.classList.toggle("is-active", cur >= left - 0.5 && cur < right);
@@ -439,6 +441,7 @@ function Journey({ onOpen }) {
           fracOf={fracOf}
           jumpTo={jumpTo}
           cursorRef={cursorRef}
+          onSkip={skipToProjects}
         />
 
         <div className="cj-view" ref={viewRef} style={{ height: mapH }}>
@@ -484,8 +487,12 @@ function Journey({ onOpen }) {
                       <BandText a={a} />
                     </span>
                     <span className="cj-band-spark" aria-hidden="true" />
-                    <span className="cj-badge" aria-hidden="true">
-                      {a.logo ? <img src={a.logo} alt="" decoding="async" /> : <span>{a.initials}</span>}
+                    {/* outer: rides along the band with its label (--shift) so the logo never
+                        slides off-screen; inner: the grow / colour animation */}
+                    <span className="cj-badge-pos" aria-hidden="true">
+                      <span className="cj-badge">
+                        {a.logo ? <img src={a.logo} alt="" decoding="async" /> : <span>{a.initials}</span>}
+                      </span>
                     </span>
                   </button>
                   {!a.promotedFrom && (
@@ -667,7 +674,7 @@ function MapSvg({ acts, geo, rows, scale, origin, nowIdx, comp, width, height, b
   );
 }
 
-function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
+function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef, onSkip }) {
   const years = [];
   let lastFrac = -1;
   for (let m = Math.floor(nowIdx / 12) * 12; m >= origin; m -= 12) {
@@ -678,23 +685,46 @@ function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
     }
   }
 
+  /*
+   * Mouse: press jumps there, dragging scrubs.
+   * Touch: the minimap must not hijack page scrolling (touch-action: pan-y), so a vertical
+   * swipe that starts on it still scrolls the page; only a clear horizontal drag scrubs, and
+   * a clean tap (no movement) jumps. Scrolling past it never makes the timeline jump.
+   */
   const onPointerDown = (e) => {
     const el = e.currentTarget;
     const go = (ev, behavior) => {
       const r = el.getBoundingClientRect();
       jumpTo((ev.clientX - r.left) / r.width, behavior);
     };
-    go(e, "smooth");
-    el.setPointerCapture(e.pointerId);
-    const move = (ev) => go(ev, "auto");
-    const up = () => {
+    const touch = e.pointerType !== "mouse";
+    const x0 = e.clientX;
+    const y0 = e.clientY;
+    let scrubbing = !touch;
+    let moved = false;
+    if (!touch) {
+      go(e, "smooth");
+      el.setPointerCapture(e.pointerId);
+    }
+    const move = (ev) => {
+      const dx = ev.clientX - x0;
+      const dy = ev.clientY - y0;
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+      if (!scrubbing && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        scrubbing = true;
+        el.setPointerCapture(ev.pointerId);
+      }
+      if (scrubbing) go(ev, "auto");
+    };
+    const end = (ev) => {
+      if (touch && ev.type === "pointerup" && !moved) go(ev, "smooth");
       el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerup", up);
-      el.removeEventListener("pointercancel", up);
+      el.removeEventListener("pointerup", end);
+      el.removeEventListener("pointercancel", end);
     };
     el.addEventListener("pointermove", move);
-    el.addEventListener("pointerup", up);
-    el.addEventListener("pointercancel", up);
+    el.addEventListener("pointerup", end);
+    el.addEventListener("pointercancel", end);
   };
 
   const onKeyDown = (e) => {
@@ -749,6 +779,11 @@ function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
           ))}
         </div>
       </div>
+
+      {/* phones: skip lives up here with the other navigation controls instead of floating over the cards */}
+      <button type="button" className="cj-skip-top" onClick={onSkip} aria-label="Skip to Projects">
+        <FiArrowDown />
+      </button>
 
       <ul className="cj-legend">
         {LANE_ORDER.map((lane) => (

@@ -188,11 +188,13 @@ html, body {
   background: #0b0b0b; box-shadow: inset 0 0 0 2.5px #bbb;
 }
 
+.cj-skip-top { display: none; }
+
 .cj-mini {
   position: relative;
   height: 38px;
   cursor: pointer;
-  touch-action: none;
+  touch-action: pan-y; /* a vertical swipe that starts here still scrolls the page */
   border-radius: 6px;
   outline: none;
 }
@@ -375,13 +377,20 @@ html, body {
 }
 .cj-band.is-active .cj-band-spark { transform: translate(-50%, -50%) scale(1); }
 
-.cj-badge {
+.cj-badge-pos {
   position: absolute;
   left: calc(var(--cj-badge) / -2);
   top: 50%;
   width: var(--cj-badge);
   height: var(--cj-badge);
   margin-top: calc(var(--cj-badge) / -2);
+  z-index: 2;
+  transform: translate3d(var(--shift, 0px), 0, 0);
+}
+.cj-badge {
+  position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   background: #fff;
   border: 3px solid var(--lane);
@@ -925,7 +934,7 @@ html, body {
 
   .cj-stage { min-height: 520px; }
   .cj-top {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 8px 14px;
     padding: 10px 16px 8px;
   }
@@ -953,11 +962,33 @@ html, body {
   .cj-m-month { font-size: 26px; height: 32px; line-height: 32px; }
   .cj-m-count { padding-bottom: 6px; }
   .cj-m-changes { display: none; }
-  .cj-m-list { grid-template-columns: 1fr; gap: 8px; padding-bottom: 56px; }
-  /* phones: a compact round button so it never covers the cards */
-  .cj .cj-skip { right: 14px; bottom: 14px; width: 48px; height: 48px; padding: 0; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
-  .cj-skip-label { display: none; }
-  .cj-skip-arrow { width: 34px; height: 34px; }
+  /* no scroll of its own on phones: a finger landing on the cards must keep scrolling the page */
+  .cj-m-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-bottom: 0;
+    overflow: hidden;
+    overscroll-behavior: auto;
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 18px), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 18px), transparent);
+  }
+  /* three or more stages at once: drop the one-line summary so every card fits */
+  .cj-m-list:has(> li:nth-child(3)) .cj-chip-sum { display: none; }
+  /* phones: skip sits in the top bar with the other navigation controls, not over the cards */
+  .cj .cj-skip { display: none; }
+  .cj .cj-skip-top {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #ffee10;
+    color: #0a0a0a;
+    font-size: 17px;
+    cursor: pointer;
+  }
+  .cj .cj-skip-top:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .cj-chip { grid-template-columns: 38px minmax(0, 1fr); gap: 10px; padding: 9px 12px; border-radius: 12px; }
   .cj-chip-logo { width: 38px; height: 38px; border-radius: 9px; }
   .cj-chip-role { font-size: 13.5px; }
