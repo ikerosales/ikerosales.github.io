@@ -35,6 +35,8 @@ const DENSITY = {
   roomy: { P: 68, off: 240, badge: 38, band: 32, start: 0.2, mid: 0.42, end: 0.62, inset: 150 },
   short: { P: 64, off: 230, badge: 32, band: 28, start: 0.2, mid: 0.42, end: 0.62, inset: 150 },
   compact: { P: 54, off: 120, badge: 32, band: 28, start: 0.16, mid: 0.32, end: 0.56, inset: 14 },
+  // phones / small windows under ~700px tall: tighter map so the cards below still fit
+  compactShort: { P: 52, off: 120, badge: 28, band: 24, start: 0.16, mid: 0.32, end: 0.56, inset: 12 },
 };
 
 const smoothstep = (t) => {
@@ -143,7 +145,8 @@ function Journey({ onOpen }) {
   const shortScreen = useMediaQuery("(max-height: 780px)");
   const finePointer = useMediaQuery("(pointer: fine)");
   const canDrag = finePointer && !compact;
-  const density = compact ? "compact" : shortScreen ? "short" : "roomy";
+  const tinyHeight = useMediaQuery("(max-height: 700px)");
+  const density = compact ? (tinyHeight ? "compactShort" : "compact") : shortScreen ? "short" : "roomy";
   const D = DENSITY[density];
 
   const { acts, nowIdx, tracks, origin } = useMemo(() => buildActivities(), []);
@@ -160,6 +163,13 @@ function Journey({ onOpen }) {
     const out = {};
     for (const a of acts) {
       out[a.id] = { left: scale.X(a.exDraw), right: scale.X(a.sx), y: rows[a.lane][a.track] };
+    }
+    // where the next (older) stage on the same track begins: a label may only spill into free space
+    for (const a of acts) {
+      const older = acts
+        .filter((b) => b !== a && b.lane === a.lane && b.track === a.track && b.exDraw <= a.sx)
+        .sort((p, q) => q.exDraw - p.exDraw)[0];
+      out[a.id].nextLeft = older ? out[older.id].left : Infinity;
     }
     return out;
   }, [acts, scale, rows]);
@@ -256,13 +266,25 @@ function Journey({ onOpen }) {
         const w = right - left;
         if (n.txtW === undefined) {
           n.txtW = n.band.querySelector(".cj-band-txt").scrollWidth;
-          n.band.classList.toggle("is-short", n.txtW + pad + 12 > w);
+          // a too-short band may let its label run past its end only into free space,
+          // never over the next stage; otherwise the label is cut with an ellipsis
+          const room = geo[a.id].nextLeft - left - pad - 12;
+          n.band.classList.toggle("is-short", n.txtW + pad + 12 > w && n.txtW <= room);
         }
         // the logo (with its label right after it) sticks to the visible left edge for as long as any
         // of the band is on screen; the logo wins over the label: if the label no longer fits, the
         // band's own overflow clips it rather than letting the logo slide away
         const shift = clamp(visibleLeft + 4 - (left - D.badge / 2), 0, Math.max(0, w - D.badge));
+        // as the band is about to leave, its pinned logo and label fade out instead of piling up
+        // against the next stage's logo
+        const remaining = left + w - visibleLeft;
+        const fade = shift > 0 ? clamp((remaining - D.badge * 2.2) / 30, 0, 1) : 1;
+        // the label goes first: once fewer than ~80px of it would be readable it fades out,
+        // so no clipped stub ("Solu") is left squeezed against the next logo
+        const textFade = shift > 0 ? clamp((remaining - pad - 80) / 30, 0, 1) : 1;
         n.band.style.setProperty("--shift", `${shift.toFixed(1)}px`);
+        n.band.style.setProperty("--fade", fade.toFixed(2));
+        n.band.style.setProperty("--text-fade", textFade.toFixed(2));
         n.band.style.setProperty("--p", `${clamp(cur - left, 0, w).toFixed(1)}px`);
         n.band.classList.toggle("is-active", cur >= left - 0.5 && cur < right);
         n.band.classList.toggle("is-on", cur >= left - 0.5);
@@ -270,7 +292,10 @@ function Journey({ onOpen }) {
         if (n.date) {
           n.date.classList.toggle("is-on", cur >= left - 0.5);
           n.date.style.transform = `translate3d(${shift.toFixed(1)}px,0,0)`;
-          n.date.style.maxWidth = `${Math.max(60, Number(n.date.dataset.max) - shift).toFixed(0)}px`;
+          const room = Number(n.date.dataset.max) - shift;
+          n.date.style.maxWidth = `${Math.max(0, room).toFixed(0)}px`;
+          // never show a chopped date ("6 → …"): hide it once it no longer fits, and fade with the band
+          n.date.style.opacity = room < 96 ? "0" : String(fade);
         }
       }
       junctions.forEach((j, i) => {

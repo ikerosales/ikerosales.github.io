@@ -125,6 +125,7 @@ const ROWS = {
   roomy: { top: 88, laneGap: 74, trackGap: 58, bottom: 54 },
   short: { top: 72, laneGap: 60, trackGap: 46, bottom: 40 },
   compact: { top: 66, laneGap: 54, trackGap: 44, bottom: 40 },
+  compactShort: { top: 60, laneGap: 44, trackGap: 36, bottom: 32 },
 };
 
 export function rowLayout(tracks, density) {
