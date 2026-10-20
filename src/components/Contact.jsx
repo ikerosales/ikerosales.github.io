@@ -408,7 +408,7 @@ const Contact = () => {
 
       <footer className="cx-foot">
         <span>© {new Date().getFullYear()} Iker Rosales Saiz</span>
-        <span className="cx-foot-mid">Designed and built in Madrid with React &amp; Framer Motion</span>
+        <span className="cx-foot-mid">Designed and built with React &amp; Framer Motion</span>
         <Magnetic enabled={fine} strength={0.35}>
           <button
             type="button"
