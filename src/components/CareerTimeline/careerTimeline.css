@@ -391,9 +391,9 @@ html, body {
   overflow: visible;
   z-index: 2;
   transform: scale(.8);
-  filter: grayscale(1);
-  opacity: .5;
-  transition: transform .6s var(--ease-spring), filter .4s ease, opacity .4s ease;
+  /* dimmed but opaque: a translucent badge let the neighbouring stage's start ring show through */
+  filter: grayscale(1) brightness(.5);
+  transition: transform .6s var(--ease-spring), filter .4s ease;
 }
 .cj-badge img { width: 72%; height: 72%; object-fit: contain; border-radius: 50%; }
 .cj-badge > span { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 11px; color: #111; }
