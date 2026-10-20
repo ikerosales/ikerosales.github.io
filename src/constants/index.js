@@ -1,9 +1,9 @@
-import feverProjectImage from "../assets/projects/fever_project_updated.png";
-import skillGapImage from "../assets/projects/skill_gap_video_portada.jpg";
-import dataJobOffersImage from "../assets/projects/data_ai_job_offers.png";
-import smartphonesImage from "../assets/projects/smartphones.jpeg";
-import mobilityTfgImage from "../assets/projects/mobility-tfg-head.png";
-import forecastingTfgImage from "../assets/projects/tfg-forecasting-head.png";
+import feverProjectImage from "../assets/projects/fever_project_updated.webp";
+import skillGapImage from "../assets/projects/skill_gap_video_portada.webp";
+import dataJobOffersImage from "../assets/projects/data_ai_job_offers.webp";
+import smartphonesImage from "../assets/projects/smartphones.webp";
+import mobilityTfgImage from "../assets/projects/mobility-tfg-head.webp";
+import forecastingTfgImage from "../assets/projects/tfg-forecasting-head.webp";
 // lightweight card thumbnails (WebP, ~800px); the full images are kept for the detail view
 import feverProjectThumb from "../assets/projects/thumbs/fever_project_updated.webp";
 import skillGapThumb from "../assets/projects/thumbs/skill_gap_video_portada.webp";

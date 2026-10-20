@@ -25,7 +25,7 @@ const Hero = () => {
           className="flex flex-col items-center md:items-start"
         >
           <img
-            src="/head-icon.png"
+            src="/head-icon.webp"
             alt="Iker Rosales head icon"
             className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-[#ffee10] bg-[#222] shadow-lg mb-4"
             style={{ boxShadow: "0 0 32px 0 #ffee10aa" }}

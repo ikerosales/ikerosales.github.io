@@ -1,12 +1,12 @@
-import awsLogo from "../../assets/experiences/aws.png";
-import imdeaLogo from "../../assets/experiences/imdea.jpg";
-import bauc3mLogo from "../../assets/experiences/bauc3m.png";
-import ntuossLogo from "../../assets/experiences/ntuoss.png";
-import salesforceLogo from "../../assets/experiences/salesforce.jpeg";
-import upmLogo from "../../assets/education/upm.png";
-import uc3mLogo from "../../assets/education/Logo_UC3M.png";
-import ntuLogo from "../../assets/education/nanyang-technological-university.png";
-import sydneyLogo from "../../assets/education/university-of-sydney.png";
+import awsLogo from "../../assets/experiences/aws.webp";
+import imdeaLogo from "../../assets/experiences/imdea.webp";
+import bauc3mLogo from "../../assets/experiences/bauc3m.webp";
+import ntuossLogo from "../../assets/experiences/ntuoss.webp";
+import salesforceLogo from "../../assets/experiences/salesforce.webp";
+import upmLogo from "../../assets/education/upm.webp";
+import uc3mLogo from "../../assets/education/Logo_UC3M.webp";
+import ntuLogo from "../../assets/education/nanyang-technological-university.webp";
+import sydneyLogo from "../../assets/education/university-of-sydney.webp";
 
 const _now = new Date();
 export const NOW = { y: _now.getFullYear(), m: _now.getMonth() + 1 };
