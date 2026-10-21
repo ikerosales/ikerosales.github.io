@@ -1,20 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { FiFileText, FiGithub, FiLinkedin } from "react-icons/fi";
+import { createHeroField } from "./heroField";
 import "./hero.css";
 
 const CV_URL = "/CV_Iker_Rosales_09_2026.pdf";
 const LINKEDIN_URL = "https://www.linkedin.com/in/iker-rosales-saiz-49218531b/";
 const GITHUB_URL = "https://github.com/ikerosales";
-
-const linesBg = (
-  <svg className="hx-bg" viewBox="0 0 1440 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,400 Q360,300 720,400 T1440,400" stroke="#ffee10" strokeOpacity="0.08" strokeWidth="2" fill="none" />
-    <path d="M0,320 Q360,220 720,320 T1440,320" stroke="#ffee10" strokeOpacity="0.06" strokeWidth="2" fill="none" />
-    <path d="M0,240 Q360,140 720,240 T1440,240" stroke="#ffee10" strokeOpacity="0.04" strokeWidth="2" fill="none" />
-    <path d="M0,160 Q360,60 720,160 T1440,160" stroke="#ffee10" strokeOpacity="0.03" strokeWidth="2" fill="none" />
-  </svg>
-);
 
 // one word that rises out of its own mask; d is its delay in seconds
 const Word = ({ d, children }) => (
@@ -26,7 +18,15 @@ const Word = ({ d, children }) => (
 const Hero = () => {
   const reduce = useReducedMotion();
   const ref = useRef(null);
+  const canvasRef = useRef(null);
+  const nameRef = useRef(null);
   const [play, setPlay] = useState(false);
+
+  // living background: dot grid + career lines (see heroField.js)
+  useEffect(
+    () => createHeroField(canvasRef.current, ref.current, { reduce, origin: nameRef.current }),
+    [reduce]
+  );
 
   // start the entrance on the first painted frame so the hidden state never flashes
   useEffect(() => {
@@ -46,12 +46,12 @@ const Hero = () => {
 
   return (
     <section ref={ref} className={`hx${reduce ? "" : " armed"}${play ? " play" : ""}`}>
-      {linesBg}
+      <canvas ref={canvasRef} className="hx-bg" aria-hidden="true" />
       <div className="hx-veil" />
       <motion.div className="hx-stmt" style={reduce ? undefined : { y, opacity }}>
         <h1 className="hx-title">
           <span className="hx-hi"><Word d={0.15}>Hi,</Word> <Word d={0.23}>I'm</Word></span>
-          <span className="hx-name"><Word d={0.36}><em>Iker</em></Word> <Word d={0.46}>Rosales</Word></span>
+          <span ref={nameRef} className="hx-name"><Word d={0.36}><em>Iker</em></Word> <Word d={0.46}>Rosales</Word></span>
         </h1>
         <span className="hx-now hx-rise" style={{ "--d": "0.8s" }}>
           <span className="hx-dot" aria-hidden="true" />
