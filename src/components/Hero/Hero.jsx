@@ -15,6 +15,9 @@ const Word = ({ d, children }) => (
   </span>
 );
 
+// the space between two masked words: still copied, but its selection box (as tall as the line) stays invisible
+const Gap = () => <span className="hx-gap"> </span>;
+
 const Hero = () => {
   const reduce = useReducedMotion();
   const ref = useRef(null);
@@ -50,8 +53,8 @@ const Hero = () => {
       <div className="hx-veil" />
       <motion.div className="hx-stmt" style={reduce ? undefined : { y, opacity }}>
         <h1 className="hx-title">
-          <span className="hx-hi"><Word d={0.15}>Hi,</Word> <Word d={0.23}>I'm</Word></span>
-          <span ref={nameRef} className="hx-name"><Word d={0.36}><em>Iker</em></Word> <Word d={0.46}>Rosales</Word></span>
+          <span className="hx-hi"><Word d={0.15}>Hi,</Word><Gap /><Word d={0.23}>I'm</Word></span>
+          <span ref={nameRef} className="hx-name"><Word d={0.36}><em>Iker</em></Word><Gap /><Word d={0.46}>Rosales</Word></span>
         </h1>
         <span className="hx-now hx-rise" style={{ "--d": "0.8s" }}>
           <span className="hx-dot" aria-hidden="true" />

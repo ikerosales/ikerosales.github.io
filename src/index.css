@@ -12,3 +12,31 @@
   scroll-behavior: smooth;
   color-scheme: dark;
 }
+
+/* Text selection in the site's colours: a yellow highlight with dark text, and a white one
+   wherever the text or its surface is already yellow, so a selection always stands out */
+::selection {
+  background: #ffee10;
+  color: #0a0a0a;
+}
+:is([class*="text-[#ffee10]"], [class*="bg-[#ffee10]"],
+    .hx-name em, .hx-now, .hx-hl, .hx-btn.primary,
+    .ab h2, .ab-hl, .ab-n, .ab-times,
+    .px-word.is-accent, .px-stats dt, .px-inline-link, .px-kind, .px-kind-inline, .px-open, .px-link.is-primary, .px-media-fallback,
+    .cx-word.is-accent, .cx-card-handle, .cx-card-icon, .cx-band, .cx-btn.is-primary, .cx-top,
+    .cj-skip-top)::selection,
+:is([class*="text-[#ffee10]"], [class*="bg-[#ffee10]"],
+    .hx-name em, .hx-now, .hx-hl, .hx-btn.primary,
+    .ab h2, .ab-hl, .ab-n, .ab-times,
+    .px-word.is-accent, .px-stats dt, .px-inline-link, .px-kind, .px-kind-inline, .px-open, .px-link.is-primary, .px-media-fallback,
+    .cx-word.is-accent, .cx-card-handle, .cx-card-icon, .cx-band, .cx-btn.is-primary, .cx-top,
+    .cj-skip-top) *::selection {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+/* photos and logos are never tinted by a selection that passes over them */
+img::selection,
+svg::selection,
+canvas::selection {
+  background: transparent !important;
+}
