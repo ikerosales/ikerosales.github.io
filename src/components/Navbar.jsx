@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const NAV_LINKS = [
   { id: "about", label: "About" },
@@ -7,14 +8,17 @@ const NAV_LINKS = [
   { id: "contact", label: "Contact" },
 ];
 
+const EASE_OUT = [0.22, 1, 0.36, 1];
+
 const Navbar = () => {
+  const reduce = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -33,14 +37,31 @@ const Navbar = () => {
     return () => observers.forEach((obs) => obs.disconnect());
   }, []);
 
+  // full-screen mobile menu: lock the page behind it, close on Escape or when widening to desktop
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onWide = () => mq.matches && setOpen(false);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onWide);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onWide);
+    };
+  }, [open]);
+
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 ${
-        scrolled ? "bg-[#111]/90 shadow-lg backdrop-blur" : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 ${
+        open ? "bg-[#0b0b0b]" : scrolled ? "bg-[#111]/90 shadow-lg backdrop-blur" : "bg-transparent"
       }`}
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 group">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="#" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
           <img
             src="/head-icon.webp"
             alt="Iker Rosales logo"
@@ -65,31 +86,80 @@ const Navbar = () => {
           ))}
         </ul>
         <button
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded focus:outline-none"
+          type="button"
+          className="md:hidden relative flex items-center justify-center w-11 h-11 -mr-1.5 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ffee10]"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Open menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
-          <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-            <rect y="5" width="24" height="2" rx="1" fill="#ffee10" />
-            <rect y="11" width="24" height="2" rx="1" fill="#ffee10" />
-            <rect y="17" width="24" height="2" rx="1" fill="#ffee10" />
-          </svg>
+          {/* three bars that fold into an X */}
+          {[-7, 0, 7].map((offset, i) => (
+            <motion.span
+              key={i}
+              className="absolute left-[10px] w-6 h-[2px] rounded-full bg-[#ffee10]"
+              style={{ top: "50%", marginTop: -1 }}
+              animate={
+                open
+                  ? { y: 0, rotate: i === 0 ? 45 : i === 2 ? -45 : 0, opacity: i === 1 ? 0 : 1 }
+                  : { y: offset, rotate: 0, opacity: 1 }
+              }
+              transition={{ duration: reduce ? 0 : 0.3, ease: EASE_OUT }}
+            />
+          ))}
         </button>
       </div>
-      {open && (
-        <div className="md:hidden bg-[#111]/95 backdrop-blur-sm border-t border-[#ffee10]/10 px-6 py-4 flex flex-col gap-4">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              className="text-[#ffee10] text-lg font-semibold py-2 px-2 rounded hover:bg-[#ffee10]/10 transition"
-              onClick={() => setOpen(false)}
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            className="md:hidden fixed inset-0 bg-[#0b0b0b] flex flex-col px-6"
+            style={{
+              paddingTop: "calc(env(safe-area-inset-top) + 88px)",
+              paddingBottom: "max(28px, env(safe-area-inset-bottom))",
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            transition={{ duration: 0.25 }}
+          >
+            <ul className="flex flex-col">
+              {NAV_LINKS.map((link, i) => (
+                <motion.li
+                  key={link.id}
+                  className="border-b border-white/10"
+                  initial={reduce ? false : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: EASE_OUT, delay: 0.05 + i * 0.06 }}
+                >
+                  <a
+                    href={`#${link.id}`}
+                    onClick={() => setOpen(false)}
+                    className={`flex items-baseline gap-4 py-5 text-[2rem] leading-none font-bold tracking-tight ${
+                      activeSection === link.id ? "text-[#ffee10]" : "text-white active:text-[#ffee10]"
+                    }`}
+                  >
+                    <span className="font-mono text-xs font-medium text-white/40 tracking-widest">0{i + 1}</span>
+                    {link.label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+            <motion.div
+              className="mt-auto flex flex-col gap-3"
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.4 }}
             >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
+              <span className="font-mono text-[11px] tracking-[0.2em] text-white/40">GET IN TOUCH</span>
+              <a href="mailto:iker251203@gmail.com" className="text-lg font-semibold text-[#ffee10] py-1">
+                iker251203@gmail.com
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

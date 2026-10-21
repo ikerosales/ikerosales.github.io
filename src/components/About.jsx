@@ -64,7 +64,7 @@ const CardGlass = ({ skill, i }) => {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true }}
-      className="w-full max-w-xs bg-white/5 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center border border-[#ffee10]/30 shadow-xl cursor-pointer relative overflow-hidden group p-1 mb-8"
+      className="w-full max-w-md md:max-w-xs bg-white/5 rounded-2xl flex flex-col items-center justify-center border border-[#ffee10]/30 shadow-xl cursor-pointer relative overflow-hidden group p-1 md:mb-8"
       whileHover={{ scale: 1.055, boxShadow: "0 8px 32px 0 #ffee10cc" }}
       transition={{ type: "spring", stiffness: 180, damping: 14 }}
       style={{ rotateX, rotateY }}
@@ -81,7 +81,7 @@ const CardGlass = ({ skill, i }) => {
         transition={{ repeat: Infinity, duration: 3 }}
         style={{ opacity: 0.10 }}
       />
-      <div className="bg-[#181818]/90 rounded-2xl py-8 px-6 min-h-[220px] flex flex-col items-center w-full relative z-10 gap-4">
+      <div className="bg-[#181818]/90 rounded-2xl py-6 md:py-8 px-5 md:px-6 md:min-h-[220px] flex flex-col items-center w-full relative z-10 gap-4">
         <motion.div
           className="flex items-center justify-center"
           style={{ x: iconX, y: iconY }}
@@ -115,9 +115,9 @@ const CardGlass = ({ skill, i }) => {
 
 const About = () => {
   return (
-    <section id="about" className="w-full flex flex-col items-center justify-center py-20 bg-[#111] relative overflow-visible">
+    <section id="about" className="w-full flex flex-col items-center justify-center py-16 md:py-20 bg-[#111] relative overflow-x-clip">
       <motion.h2
-        className="text-3xl md:text-4xl font-bold text-[#ffee10] mb-4"
+        className="text-3xl md:text-4xl font-bold text-[#ffee10] mb-6 md:mb-4"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -150,7 +150,7 @@ const About = () => {
         </motion.div>
 
         <motion.p
-          className="max-w-2xl text-lg md:text-xl text-gray-100 text-center md:text-left leading-relaxed"
+          className="max-w-2xl text-base md:text-xl text-gray-100 text-left leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -159,7 +159,7 @@ const About = () => {
           {aboutData.description}
         </motion.p>
       </div>
-      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mt-2 z-10">
+      <div className="w-full px-5 flex flex-col md:flex-row items-center justify-center gap-5 md:gap-12 mt-2 z-10">
         {skills.map((skill, i) => <CardGlass key={skill.title} skill={skill} i={i} />)}
       </div>
     </section>

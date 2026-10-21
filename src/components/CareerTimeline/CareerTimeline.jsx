@@ -14,6 +14,7 @@ import {
   LANE_ORDER,
   buildActivities,
   clamp,
+  compactMetrics,
   findCompression,
   findJunctions,
   makeScale,
@@ -144,7 +145,25 @@ function Journey({ onOpen }) {
   const finePointer = useMediaQuery("(pointer: fine)");
   const canDrag = finePointer && !compact;
   const density = compact ? "compact" : shortScreen ? "short" : "roomy";
-  const D = DENSITY[density];
+
+  // Height the pinned stage gets. Only big changes (rotation, window resize) count: on phones the
+  // browser toolbar showing / hiding while scrolling must not re-lay out the map mid-scroll.
+  const [stageH, setStageH] = useState(() => (typeof window !== "undefined" ? window.innerHeight - NAV_H : 700));
+  useEffect(() => {
+    let width = window.innerWidth;
+    const onResize = () => {
+      const h = window.innerHeight - NAV_H;
+      setStageH((prev) => (Math.abs(h - prev) > 120 || window.innerWidth !== width ? h : prev));
+      width = window.innerWidth;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  const phone = useMemo(() => compactMetrics(stageH), [stageH]);
+  const D = useMemo(
+    () => (compact ? { ...DENSITY.compact, badge: phone.badge, band: phone.band } : DENSITY[density]),
+    [compact, phone, density]
+  );
 
   const { acts, nowIdx, tracks, origin } = useMemo(() => buildActivities(), []);
   const comp = useMemo(() => findCompression(acts), [acts]);
@@ -153,13 +172,23 @@ function Journey({ onOpen }) {
     () => mirrorScale(makeScale({ origin, P: D.P, left: 0, comp }), nowIdx, D.off),
     [origin, D.P, D.off, comp, nowIdx]
   );
-  const { rows, height: mapH } = useMemo(() => rowLayout(tracks, density), [tracks, density]);
+  const { rows, height: mapH } = useMemo(
+    () => rowLayout(tracks, compact ? phone.rows : density),
+    [tracks, compact, phone, density]
+  );
   const junctions = useMemo(() => findJunctions(acts, rows), [acts, rows]);
 
   const geo = useMemo(() => {
     const out = {};
     for (const a of acts) {
       out[a.id] = { left: scale.X(a.exDraw), right: scale.X(a.sx), y: rows[a.lane][a.track] };
+    }
+    // where the next (older) stage on the same track begins: a label may only spill into free space
+    for (const a of acts) {
+      const older = acts
+        .filter((b) => b !== a && b.lane === a.lane && b.track === a.track && b.exDraw <= a.sx)
+        .sort((p, q) => q.exDraw - p.exDraw)[0];
+      out[a.id].nextLeft = older ? out[older.id].left : Infinity;
     }
     return out;
   }, [acts, scale, rows]);
@@ -256,11 +285,25 @@ function Journey({ onOpen }) {
         const w = right - left;
         if (n.txtW === undefined) {
           n.txtW = n.band.querySelector(".cj-band-txt").scrollWidth;
-          n.band.classList.toggle("is-short", n.txtW + pad + 12 > w);
+          // a too-short band may let its label run past its end only into free space,
+          // never over the next stage; otherwise the label is cut with an ellipsis
+          const room = geo[a.id].nextLeft - left - pad - 12;
+          n.band.classList.toggle("is-short", n.txtW + pad + 12 > w && n.txtW <= room);
         }
-        // stop before the band's end so the label never runs into the next stage's logo
-        const shift = clamp(visibleLeft - (left + pad), 0, Math.max(0, w - pad - D.badge / 2 - 14 - n.txtW));
+        // the logo (with its label right after it) sticks to the visible left edge for as long as any
+        // of the band is on screen; the logo wins over the label: if the label no longer fits, the
+        // band's own overflow clips it rather than letting the logo slide away
+        const shift = clamp(visibleLeft + 4 - (left - D.badge / 2), 0, Math.max(0, w - D.badge));
+        // as the band is about to leave, its pinned logo and label fade out instead of piling up
+        // against the next stage's logo
+        const remaining = left + w - visibleLeft;
+        const fade = shift > 0 ? clamp((remaining - D.badge * 2.2) / 30, 0, 1) : 1;
+        // the label goes first: once fewer than ~80px of it would be readable it fades out,
+        // so no clipped stub ("Solu") is left squeezed against the next logo
+        const textFade = shift > 0 ? clamp((remaining - pad - 80) / 30, 0, 1) : 1;
         n.band.style.setProperty("--shift", `${shift.toFixed(1)}px`);
+        n.band.style.setProperty("--fade", fade.toFixed(2));
+        n.band.style.setProperty("--text-fade", textFade.toFixed(2));
         n.band.style.setProperty("--p", `${clamp(cur - left, 0, w).toFixed(1)}px`);
         n.band.classList.toggle("is-active", cur >= left - 0.5 && cur < right);
         n.band.classList.toggle("is-on", cur >= left - 0.5);
@@ -268,7 +311,10 @@ function Journey({ onOpen }) {
         if (n.date) {
           n.date.classList.toggle("is-on", cur >= left - 0.5);
           n.date.style.transform = `translate3d(${shift.toFixed(1)}px,0,0)`;
-          n.date.style.maxWidth = `${Math.max(60, Number(n.date.dataset.max) - shift).toFixed(0)}px`;
+          const room = Number(n.date.dataset.max) - shift;
+          n.date.style.maxWidth = `${Math.max(0, room).toFixed(0)}px`;
+          // never show a chopped date ("6 → …"): hide it once it no longer fits, and fade with the band
+          n.date.style.opacity = room < 96 ? "0" : String(fade);
         }
       }
       junctions.forEach((j, i) => {
@@ -439,6 +485,7 @@ function Journey({ onOpen }) {
           fracOf={fracOf}
           jumpTo={jumpTo}
           cursorRef={cursorRef}
+          onSkip={skipToProjects}
         />
 
         <div className="cj-view" ref={viewRef} style={{ height: mapH }}>
@@ -484,8 +531,12 @@ function Journey({ onOpen }) {
                       <BandText a={a} />
                     </span>
                     <span className="cj-band-spark" aria-hidden="true" />
-                    <span className="cj-badge" aria-hidden="true">
-                      {a.logo ? <img src={a.logo} alt="" decoding="async" /> : <span>{a.initials}</span>}
+                    {/* outer: rides along the band with its label (--shift) so the logo never
+                        slides off-screen; inner: the grow / colour animation */}
+                    <span className="cj-badge-pos" aria-hidden="true">
+                      <span className="cj-badge">
+                        {a.logo ? <img src={a.logo} alt="" decoding="async" /> : <span>{a.initials}</span>}
+                      </span>
                     </span>
                   </button>
                   {!a.promotedFrom && (
@@ -550,8 +601,8 @@ function Journey({ onOpen }) {
 
         <Manifest acts={acts} month={month} onOpen={onOpen} hintRef={hintRef} />
 
-        <button type="button" className="cj-skip" ref={skipRef} onClick={skipToProjects}>
-          Skip to Projects
+        <button type="button" className="cj-skip" ref={skipRef} onClick={skipToProjects} aria-label="Skip to Projects">
+          <span className="cj-skip-label">Skip to Projects</span>
           <span className="cj-skip-arrow" aria-hidden="true">
             <FiArrowDown />
           </span>
@@ -667,7 +718,7 @@ function MapSvg({ acts, geo, rows, scale, origin, nowIdx, comp, width, height, b
   );
 }
 
-function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
+function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef, onSkip }) {
   const years = [];
   let lastFrac = -1;
   for (let m = Math.floor(nowIdx / 12) * 12; m >= origin; m -= 12) {
@@ -678,23 +729,46 @@ function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
     }
   }
 
+  /*
+   * Mouse: press jumps there, dragging scrubs.
+   * Touch: the minimap must not hijack page scrolling (touch-action: pan-y), so a vertical
+   * swipe that starts on it still scrolls the page; only a clear horizontal drag scrubs, and
+   * a clean tap (no movement) jumps. Scrolling past it never makes the timeline jump.
+   */
   const onPointerDown = (e) => {
     const el = e.currentTarget;
     const go = (ev, behavior) => {
       const r = el.getBoundingClientRect();
       jumpTo((ev.clientX - r.left) / r.width, behavior);
     };
-    go(e, "smooth");
-    el.setPointerCapture(e.pointerId);
-    const move = (ev) => go(ev, "auto");
-    const up = () => {
+    const touch = e.pointerType !== "mouse";
+    const x0 = e.clientX;
+    const y0 = e.clientY;
+    let scrubbing = !touch;
+    let moved = false;
+    if (!touch) {
+      go(e, "smooth");
+      el.setPointerCapture(e.pointerId);
+    }
+    const move = (ev) => {
+      const dx = ev.clientX - x0;
+      const dy = ev.clientY - y0;
+      if (Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+      if (!scrubbing && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        scrubbing = true;
+        el.setPointerCapture(ev.pointerId);
+      }
+      if (scrubbing) go(ev, "auto");
+    };
+    const end = (ev) => {
+      if (touch && ev.type === "pointerup" && !moved) go(ev, "smooth");
       el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerup", up);
-      el.removeEventListener("pointercancel", up);
+      el.removeEventListener("pointerup", end);
+      el.removeEventListener("pointercancel", end);
     };
     el.addEventListener("pointermove", move);
-    el.addEventListener("pointerup", up);
-    el.addEventListener("pointercancel", up);
+    el.addEventListener("pointerup", end);
+    el.addEventListener("pointercancel", end);
   };
 
   const onKeyDown = (e) => {
@@ -750,6 +824,11 @@ function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
         </div>
       </div>
 
+      {/* phones: skip lives up here with the other navigation controls instead of floating over the cards */}
+      <button type="button" className="cj-skip-top" onClick={onSkip} aria-label="Skip to Projects">
+        <FiArrowDown />
+      </button>
+
       <ul className="cj-legend">
         {LANE_ORDER.map((lane) => (
           <li key={lane} className={`ct-lane-${lane}`}>
@@ -773,6 +852,31 @@ function TopBar({ acts, origin, nowIdx, comp, fracOf, jumpTo, cursorRef }) {
 function Manifest({ acts, month, onOpen, hintRef }) {
   const mid = month + 0.5;
   const active = acts.filter((a) => a.sx <= mid && mid < a.exDraw).sort((p, q) => q.sx - p.sx);
+
+  /*
+   * Card density adapts to the room actually available instead of a fixed breakpoint:
+   * full cards (two-line summary) -> "lite" (one-line summary) -> "nosum" (no summary) -> "row" (compact rows).
+   * Measured before paint, so there is no flicker; height changes animate via `layout`.
+   */
+  const listRef = useRef(null);
+  const [mode, setMode] = useState("full");
+  const [listH, setListH] = useState(0);
+  const activeKey = active.map((a) => a.id).join(",");
+  useLayoutEffect(() => {
+    const el = listRef.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(([entry]) => setListH(Math.round(entry.contentRect.height)));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  useLayoutEffect(() => {
+    setMode("full");
+  }, [activeKey, listH]);
+  useLayoutEffect(() => {
+    const el = listRef.current;
+    if (!el || el.scrollHeight <= el.clientHeight + 1) return;
+    setMode((m) => ({ full: "lite", lite: "nosum" }[m] || "row"));
+  });
 
   // most recent month with a change, so the latest start / end stays readable
   const changeMonths = acts.flatMap((a) => (a.ended && !a.handoverTo ? [a.sx, a.ex] : [a.sx]));
@@ -835,7 +939,7 @@ function Manifest({ acts, month, onOpen, hintRef }) {
         )}
       </div>
 
-      <ul className="cj-m-list">
+      <ul className={`cj-m-list is-${mode}`} ref={listRef}>
         <AnimatePresence initial={false} mode="popLayout">
           {active.map((a) => {
             const until = a.ended ? Math.min(month, a.ex - 1) : month;
