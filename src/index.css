@@ -12,3 +12,23 @@
   scroll-behavior: smooth;
   color-scheme: dark;
 }
+
+/* Text selection in the site's colours: a yellow highlight with dark text everywhere,
+   and a white one on surfaces that are already yellow (primary buttons, badges), where yellow would vanish */
+::selection {
+  background: #ffee10;
+  color: #0a0a0a;
+}
+:is([class*="bg-[#ffee10]"], .hx-btn.primary, .ab-times, .px-kind, .px-open, .px-link.is-primary,
+    .cx-band, .cx-btn.is-primary, .cx-top, .cj-skip-top)::selection,
+:is([class*="bg-[#ffee10]"], .hx-btn.primary, .ab-times, .px-kind, .px-open, .px-link.is-primary,
+    .cx-band, .cx-btn.is-primary, .cx-top, .cj-skip-top) *::selection {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+/* photos and logos are never tinted by a selection that passes over them */
+img::selection,
+svg::selection,
+canvas::selection {
+  background: transparent !important;
+}

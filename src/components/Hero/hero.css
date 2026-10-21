@@ -71,6 +71,7 @@
 /* ---------- entrance: one short, ordered sequence (the text is complete in under 2 s) ---------- */
 .hx-m { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .02em .12em; margin-bottom: -.12em; }
 .hx-m > span { display: inline-block; }
+.hx-gap::selection { background: transparent; }
 .hx.armed .hx-m > span { transform: translateY(110%) rotate(3deg); }
 .hx.armed.play .hx-m > span { transform: none; transition: transform .95s var(--hx-snap) var(--d, 0s); }
 .hx.armed .hx-rise { opacity: 0; transform: translateY(14px); }

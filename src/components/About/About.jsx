@@ -92,7 +92,9 @@ const Title = () => {
   const seen = useSeen(ref, 0.4);
   return (
     <h2 ref={ref} id="about-title" className={seen ? "in" : ""}>
-      <span className="ab-wm"><span className="ab-wd">About</span></span>{" "}
+      <span className="ab-wm"><span className="ab-wd">About</span></span>
+      {/* the space is still copied, but its line-tall selection box stays invisible */}
+      <span className="ab-gap"> </span>
       <span className="ab-wm">
         <span className="ab-wd ab-ul">
           Me
