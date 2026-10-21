@@ -54,7 +54,10 @@ const Navbar = () => {
   }, [open]);
 
   return (
-    <nav
+    <motion.nav
+      initial={reduce ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, ease: EASE_OUT }}
       className={`fixed top-0 left-0 w-full z-30 transition-colors duration-300 ${
         open ? "bg-[#0b0b0b]" : scrolled ? "bg-[#111]/90 shadow-lg backdrop-blur" : "bg-transparent"
       }`}
@@ -160,7 +163,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
