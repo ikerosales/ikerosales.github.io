@@ -148,6 +148,31 @@ export function compactMetrics(stageH) {
   };
 }
 
+/*
+ * Laptops and big monitors: from the usual ~720px of stage the map grows with the height (thicker
+ * bands, bigger badges, more air between lanes, a little more room per month) up to ~1000px, so a
+ * tall screen isn't left with a band of empty space under the cards. `t` also scales the cards (CSS).
+ * On even taller monitors the spacing (up to 2.2x the step) and the cards (`k`, up to 1.6x) keep growing,
+ * while bands and badges stay put.
+ */
+export function roomyMetrics(stageH) {
+  const t = clamp((stageH - 720) / 280, 0, 1);
+  const tr = clamp((stageH - 720) / 280, 0, 2.2);
+  const k = clamp((stageH - 720) / 280, 0, 1.6);
+  return {
+    k: Math.round(k * 100) / 100,
+    P: Math.round(lerp(68, 78, t)),
+    band: Math.round(lerp(32, 44, t)),
+    badge: Math.round(lerp(38, 54, t)),
+    rows: {
+      top: Math.round(lerp(88, 140, tr)),
+      laneGap: Math.round(lerp(74, 130, tr)),
+      trackGap: Math.round(lerp(58, 96, tr)),
+      bottom: Math.round(lerp(54, 86, tr)),
+    },
+  };
+}
+
 // `density` is a ROWS key or an explicit spacing object (from compactMetrics)
 export function rowLayout(tracks, density) {
   const { top, laneGap, trackGap, bottom } = typeof density === "string" ? ROWS[density] : density;

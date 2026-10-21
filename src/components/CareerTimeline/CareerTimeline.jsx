@@ -15,6 +15,7 @@ import {
   buildActivities,
   clamp,
   compactMetrics,
+  roomyMetrics,
   findCompression,
   findJunctions,
   makeScale,
@@ -160,10 +161,12 @@ function Journey({ onOpen }) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
   const phone = useMemo(() => compactMetrics(stageH), [stageH]);
-  const D = useMemo(
-    () => (compact ? { ...DENSITY.compact, badge: phone.badge, band: phone.band } : DENSITY[density]),
-    [compact, phone, density]
-  );
+  const big = useMemo(() => roomyMetrics(stageH), [stageH]);
+  const D = useMemo(() => {
+    if (compact) return { ...DENSITY.compact, badge: phone.badge, band: phone.band };
+    if (density === "roomy") return { ...DENSITY.roomy, P: big.P, badge: big.badge, band: big.band };
+    return DENSITY[density];
+  }, [compact, phone, big, density]);
 
   const { acts, nowIdx, tracks, origin } = useMemo(() => buildActivities(), []);
   const comp = useMemo(() => findCompression(acts), [acts]);
@@ -173,8 +176,8 @@ function Journey({ onOpen }) {
     [origin, D.P, D.off, comp, nowIdx]
   );
   const { rows, height: mapH } = useMemo(
-    () => rowLayout(tracks, compact ? phone.rows : density),
-    [tracks, compact, phone, density]
+    () => rowLayout(tracks, compact ? phone.rows : density === "roomy" ? big.rows : density),
+    [tracks, compact, phone, big, density]
   );
   const junctions = useMemo(() => findJunctions(acts, rows), [acts, rows]);
 
@@ -474,7 +477,13 @@ function Journey({ onOpen }) {
     <div
       className={`cj is-${density}`}
       ref={trackRef}
-      style={{ "--cj-distance": `${distance}px`, "--cj-badge": `${D.badge}px`, "--cj-band": `${D.band}px` }}
+      style={{
+        "--cj-distance": `${distance}px`,
+        "--cj-badge": `${D.badge}px`,
+        "--cj-band": `${D.band}px`,
+        // 0 on regular and short screens, growing on tall ones: the cards grow along with the map
+        "--cj-k": !compact && density === "roomy" ? big.k : 0,
+      }}
     >
       <div className="cj-stage" ref={stageRef}>
         <TopBar
