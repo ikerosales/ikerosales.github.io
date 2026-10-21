@@ -12,10 +12,6 @@ import smartphonesThumb from "../assets/projects/thumbs/smartphones.webp";
 import mobilityTfgThumb from "../assets/projects/thumbs/mobility-tfg-head.webp";
 import forecastingTfgThumb from "../assets/projects/thumbs/tfg-forecasting-head.webp";
 
-export const aboutData = {
-  description: `I'm currently pursuing an MSc in Artificial Intelligence at Universidad Politécnica de Madrid while working as a Solution Engineer at Salesforce. I recently graduated in Data Science and Telecommunications Engineering from UC3M, with exchange years at NTU Singapore and the University of Sydney, where I also did research. My background spans full ML/DL projects at IMDEA and The University of Sydney, cloud solutions architecture at AWS and Salesforce. I enjoy building things that are useful, clear, and technical enough to actually work.`
-};
-
 export const projects = [
   {
     slug: "neurosym-forecasting",
