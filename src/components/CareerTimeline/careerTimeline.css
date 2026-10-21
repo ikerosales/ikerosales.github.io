@@ -975,13 +975,6 @@ html, body {
     mask-image: linear-gradient(#000 calc(100% - 18px), transparent);
   }
   /* three or more stages at once: drop the one-line summary so every card fits */
-  /* three or more stages at once: each card collapses to a compact row so all of them fit */
-  .cj-m-list:has(> li:nth-child(3)) { gap: 6px; }
-  .cj-m-list:has(> li:nth-child(3)) .cj-chip-sum { display: none; }
-  .cj-m-list:has(> li:nth-child(3)) .cj-chip { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 7px 10px; align-items: center; }
-  .cj-m-list:has(> li:nth-child(3)) .cj-chip-logo { width: 30px; height: 30px; border-radius: 8px; }
-  .cj-m-list:has(> li:nth-child(3)) .cj-chip-role { font-size: 13px; -webkit-line-clamp: 1; }
-  .cj-m-list:has(> li:nth-child(3)) .cj-chip-text { gap: 1px; }
   /* phones: skip sits in the top bar with the other navigation controls, not over the cards */
   .cj .cj-skip { display: none; }
   .cj .cj-skip-top {
@@ -1028,4 +1021,21 @@ html, body {
   .cj-m-month { font-size: 20px; height: 26px; line-height: 26px; }
   .cj-m-count { padding-bottom: 3px; }
   .cj-hint { display: none; }
+}
+
+/* card density chosen in Manifest from the room actually available (all screen sizes) */
+.cj-m-list.is-lite .cj-chip-sum { -webkit-line-clamp: 1; }
+.cj-m-list.is-nosum .cj-chip-sum { display: none; }
+.cj-m-list.is-row { gap: 6px; }
+.cj-m-list.is-row .cj-chip-sum { display: none; }
+.cj-m-list.is-row .cj-chip { grid-template-columns: 30px minmax(0, 1fr); gap: 10px; padding: 7px 10px; align-items: center; }
+.cj-m-list.is-row .cj-chip-logo { width: 30px; height: 30px; border-radius: 8px; }
+.cj-m-list.is-row .cj-chip-role { font-size: 13px; -webkit-line-clamp: 1; }
+.cj-m-list.is-row .cj-chip-text { gap: 1px; }
+
+/* tall phones: there is room for the latest start / end line under the month */
+@media (max-width: 720px) and (min-height: 800px) {
+  .cj-m-changes { display: grid; grid-column: 1 / -1; margin-top: 4px; padding-top: 8px; gap: 3px; }
+  .cj-change { font-size: 12px; }
+  .cj-m-changes-k { font-size: 9px; }
 }

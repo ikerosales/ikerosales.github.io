@@ -14,6 +14,7 @@ import {
   LANE_ORDER,
   buildActivities,
   clamp,
+  compactMetrics,
   findCompression,
   findJunctions,
   makeScale,
@@ -35,8 +36,6 @@ const DENSITY = {
   roomy: { P: 68, off: 240, badge: 38, band: 32, start: 0.2, mid: 0.42, end: 0.62, inset: 150 },
   short: { P: 64, off: 230, badge: 32, band: 28, start: 0.2, mid: 0.42, end: 0.62, inset: 150 },
   compact: { P: 54, off: 120, badge: 32, band: 28, start: 0.16, mid: 0.32, end: 0.56, inset: 14 },
-  // phones / small windows under ~700px tall: tighter map so the cards below still fit
-  compactShort: { P: 52, off: 120, badge: 28, band: 24, start: 0.16, mid: 0.32, end: 0.56, inset: 12 },
 };
 
 const smoothstep = (t) => {
@@ -145,9 +144,26 @@ function Journey({ onOpen }) {
   const shortScreen = useMediaQuery("(max-height: 780px)");
   const finePointer = useMediaQuery("(pointer: fine)");
   const canDrag = finePointer && !compact;
-  const tinyHeight = useMediaQuery("(max-height: 700px)");
-  const density = compact ? (tinyHeight ? "compactShort" : "compact") : shortScreen ? "short" : "roomy";
-  const D = DENSITY[density];
+  const density = compact ? "compact" : shortScreen ? "short" : "roomy";
+
+  // Height the pinned stage gets. Only big changes (rotation, window resize) count: on phones the
+  // browser toolbar showing / hiding while scrolling must not re-lay out the map mid-scroll.
+  const [stageH, setStageH] = useState(() => (typeof window !== "undefined" ? window.innerHeight - NAV_H : 700));
+  useEffect(() => {
+    let width = window.innerWidth;
+    const onResize = () => {
+      const h = window.innerHeight - NAV_H;
+      setStageH((prev) => (Math.abs(h - prev) > 120 || window.innerWidth !== width ? h : prev));
+      width = window.innerWidth;
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  const phone = useMemo(() => compactMetrics(stageH), [stageH]);
+  const D = useMemo(
+    () => (compact ? { ...DENSITY.compact, badge: phone.badge, band: phone.band } : DENSITY[density]),
+    [compact, phone, density]
+  );
 
   const { acts, nowIdx, tracks, origin } = useMemo(() => buildActivities(), []);
   const comp = useMemo(() => findCompression(acts), [acts]);
@@ -156,7 +172,10 @@ function Journey({ onOpen }) {
     () => mirrorScale(makeScale({ origin, P: D.P, left: 0, comp }), nowIdx, D.off),
     [origin, D.P, D.off, comp, nowIdx]
   );
-  const { rows, height: mapH } = useMemo(() => rowLayout(tracks, density), [tracks, density]);
+  const { rows, height: mapH } = useMemo(
+    () => rowLayout(tracks, compact ? phone.rows : density),
+    [tracks, compact, phone, density]
+  );
   const junctions = useMemo(() => findJunctions(acts, rows), [acts, rows]);
 
   const geo = useMemo(() => {
@@ -834,6 +853,31 @@ function Manifest({ acts, month, onOpen, hintRef }) {
   const mid = month + 0.5;
   const active = acts.filter((a) => a.sx <= mid && mid < a.exDraw).sort((p, q) => q.sx - p.sx);
 
+  /*
+   * Card density adapts to the room actually available instead of a fixed breakpoint:
+   * full cards (two-line summary) -> "lite" (one-line summary) -> "nosum" (no summary) -> "row" (compact rows).
+   * Measured before paint, so there is no flicker; height changes animate via `layout`.
+   */
+  const listRef = useRef(null);
+  const [mode, setMode] = useState("full");
+  const [listH, setListH] = useState(0);
+  const activeKey = active.map((a) => a.id).join(",");
+  useLayoutEffect(() => {
+    const el = listRef.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(([entry]) => setListH(Math.round(entry.contentRect.height)));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  useLayoutEffect(() => {
+    setMode("full");
+  }, [activeKey, listH]);
+  useLayoutEffect(() => {
+    const el = listRef.current;
+    if (!el || el.scrollHeight <= el.clientHeight + 1) return;
+    setMode((m) => ({ full: "lite", lite: "nosum" }[m] || "row"));
+  });
+
   // most recent month with a change, so the latest start / end stays readable
   const changeMonths = acts.flatMap((a) => (a.ended && !a.handoverTo ? [a.sx, a.ex] : [a.sx]));
   const lastChange = Math.max(...changeMonths.filter((m) => m <= month));
@@ -895,7 +939,7 @@ function Manifest({ acts, month, onOpen, hintRef }) {
         )}
       </div>
 
-      <ul className="cj-m-list">
+      <ul className={`cj-m-list is-${mode}`} ref={listRef}>
         <AnimatePresence initial={false} mode="popLayout">
           {active.map((a) => {
             const until = a.ended ? Math.min(month, a.ex - 1) : month;

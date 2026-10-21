@@ -124,12 +124,33 @@ export function mirrorScale(scale, nowIdx, off) {
 const ROWS = {
   roomy: { top: 88, laneGap: 74, trackGap: 58, bottom: 54 },
   short: { top: 72, laneGap: 60, trackGap: 46, bottom: 40 },
-  compact: { top: 66, laneGap: 54, trackGap: 44, bottom: 40 },
-  compactShort: { top: 60, laneGap: 44, trackGap: 36, bottom: 32 },
 };
 
+const lerp = (a, b, t) => a + (b - a) * t;
+
+/*
+ * Phones: the map scales with the available height, from an iPhone SE (~600px of stage) up to a
+ * Pro Max (~900px), so taller screens don't end up with a band of empty space under the cards.
+ * The minimum gaps keep room for a date label (~12px) between rows, so a label never touches the
+ * band above it.
+ */
+export function compactMetrics(stageH) {
+  const t = clamp((stageH - 600) / 300, 0, 1);
+  return {
+    band: Math.round(lerp(24, 32, t)),
+    badge: Math.round(lerp(28, 38, t)),
+    rows: {
+      top: Math.round(lerp(60, 88, t)),
+      laneGap: Math.round(lerp(50, 80, t)),
+      trackGap: Math.round(lerp(48, 64, t)),
+      bottom: Math.round(lerp(34, 56, t)),
+    },
+  };
+}
+
+// `density` is a ROWS key or an explicit spacing object (from compactMetrics)
 export function rowLayout(tracks, density) {
-  const { top, laneGap, trackGap, bottom } = ROWS[density];
+  const { top, laneGap, trackGap, bottom } = typeof density === "string" ? ROWS[density] : density;
   const rows = {};
   let y = top;
   LANE_ORDER.forEach((lane, i) => {
