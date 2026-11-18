@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-.ab-bento { display: grid; gap: 12px; grid-template-columns: 1fr; grid-template-areas: "photo" "intro" "now" "stats" "do" "cert" "ai" "ml" "cloud"; }
+.ab-bento { display: grid; gap: 12px; grid-template-columns: 1fr; grid-template-areas: "photo" "intro" "now" "stats" "do" "cert" "awards" "ai" "ml" "cloud"; }
 .ab-tile {
   position: relative; min-width: 0; overflow: hidden;
   background: var(--ab-panel); border: 1px solid var(--ab-line); border-radius: 20px; padding: 18px;
@@ -109,8 +109,9 @@
 .ab-do b { display: block; font-size: 15px; line-height: 1.3; margin-bottom: 3px; }
 .ab-do span:not(.ab-ic) { display: block; color: #bdbdbd; font-size: 13.5px; line-height: 1.5; }
 
-/* ---------- certified & recognised ---------- */
-.ab-t-cert { grid-area: cert; display: grid; gap: 12px; align-content: start; }
+/* ---------- certifications / awards ---------- */
+.ab-t-cert, .ab-t-awards { display: grid; gap: 12px; align-content: start; }
+.ab-t-cert { grid-area: cert; } .ab-t-awards { grid-area: awards; }
 .ab-cert { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; align-items: center; }
 .ab-badge { box-sizing: border-box; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; overflow: hidden; flex: none; background: #fff; }
 .ab-badge img { display: block; width: 100%; height: 100%; object-fit: contain; }
@@ -161,7 +162,8 @@ a.ab-cert:focus-visible { outline: 2px solid var(--ab-accent); outline-offset: 2
       "photo photo intro intro"
       "photo photo now now"
       "stats stats stats stats"
-      "do do cert cert"
+      "do do do do"
+      "cert cert awards awards"
       "ai ai ml ml"
       "cloud cloud cloud cloud";
   }
@@ -170,6 +172,7 @@ a.ab-cert:focus-visible { outline: 2px solid var(--ab-accent); outline-offset: 2
   .ab-t-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .ab-flags-stat { grid-column: span 2; }
   .ab-t-intro { font-size: 17px; }
+  .ab-do { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 }
 /* ---------- laptops / iPad Pro landscape ---------- */
 @container (min-width: 960px) {
@@ -179,10 +182,15 @@ a.ab-cert:focus-visible { outline: 2px solid var(--ab-accent); outline-offset: 2
       "photo photo intro intro intro intro"
       "photo photo now now stats stats"
       "do do do cert cert cert"
+      "awards awards awards awards awards awards"
       "ai ai ml ml cloud cloud";
   }
   .ab-t-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ab-flags-stat { grid-column: 1 / -1; }
+  .ab-do { grid-template-columns: 1fr; gap: 14px; }
+  /* awards sit in one wide row: three short items side by side */
+  .ab-t-awards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 24px; align-items: center; }
+  .ab-t-awards .ab-k { grid-column: 1 / -1; margin-bottom: 0; }
   .ab-t-intro { font-size: 19px; }
   .ab-photo { width: min(180px, 64%); }
   .ab-n { font-size: 34px; }

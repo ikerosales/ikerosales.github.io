@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./about.css";
 import myPic from "../../assets/my_pic.webp";
 import { BRANDS } from "./brands";
-import { now, stats, countries, doing, certs, skills, READABLE, GLYPHS } from "./aboutData";
+import { now, stats, countries, doing, certs, awards, skills, READABLE, GLYPHS } from "./aboutData";
 
 const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -131,6 +131,27 @@ const PhotoTile = () => {
   );
 };
 
+// one row per credential; a row with an href is a link to its public proof
+const CertList = ({ items }) =>
+  items.map((c, i) => {
+    const body = (
+      <>
+        <span className={`ab-badge${c.padded ? " padded" : ""}`}><img src={c.logo} alt={c.alt} /></span>
+        <div>
+          <b>{c.title}{c.times && <span className="ab-times">{c.times}×</span>}</b>
+          <small>{c.sub}</small>
+        </div>
+      </>
+    );
+    return c.href ? (
+      <a key={c.title} className="ab-cert ab-st is-link" style={{ "--i": i }} href={c.href} target="_blank" rel="noopener noreferrer">
+        {body}<Arrow />
+      </a>
+    ) : (
+      <div key={c.title} className="ab-cert ab-st" style={{ "--i": i }}>{body}</div>
+    );
+  });
+
 const About = () => (
   <section id="about" className="ab" aria-labelledby="about-title">
     <div className="ab-inner">
@@ -191,29 +212,17 @@ const About = () => (
         </Tile>
 
         <Tile className="ab-t-cert" order={5}>
-          <span className="ab-k">Certified &amp; recognised</span>
-          {certs.map((c, i) => {
-            const body = (
-              <>
-                <span className={`ab-badge${c.padded ? " padded" : ""}`}><img src={c.logo} alt={c.alt} /></span>
-                <div>
-                  <b>{c.title}{c.times && <span className="ab-times">{c.times}×</span>}</b>
-                  <small>{c.sub}</small>
-                </div>
-              </>
-            );
-            return c.href ? (
-              <a key={c.title} className="ab-cert ab-st is-link" style={{ "--i": i }} href={c.href} target="_blank" rel="noopener noreferrer">
-                {body}<Arrow />
-              </a>
-            ) : (
-              <div key={c.title} className="ab-cert ab-st" style={{ "--i": i }}>{body}</div>
-            );
-          })}
+          <span className="ab-k">Certifications</span>
+          <CertList items={certs} />
+        </Tile>
+
+        <Tile className="ab-t-awards" order={6}>
+          <span className="ab-k">Awards &amp; scholarships</span>
+          <CertList items={awards} />
         </Tile>
 
         {skills.map((s, k) => (
-          <Tile key={s.key} className={`ab-t-skill ab-t-${s.key}`} order={6 + k} style={{ "--c": s.color }}>
+          <Tile key={s.key} className={`ab-t-skill ab-t-${s.key}`} order={7 + k} style={{ "--c": s.color }}>
             <span className="ab-sk-mark"><Glyph name={s.glyph} /></span>
             <div className="ab-sk-head">
               <span className="ab-sk-ic ab-draw"><Glyph name={s.glyph} /></span>

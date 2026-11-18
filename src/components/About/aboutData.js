@@ -1,3 +1,4 @@
+import anthropic from "../../assets/about/anthropic.svg";
 import aws from "../../assets/about/aws.webp";
 import nova from "../../assets/about/nova.webp";
 import comunidadMadrid from "../../assets/about/comunidad-madrid.webp";
@@ -43,6 +44,18 @@ export const doing = [
 
 export const certs = [
   {
+    title: "Claude Certified Architect – Professional",
+    sub: "Anthropic · 2026",
+    logo: anthropic, alt: "Anthropic",
+    href: "https://www.credly.com/badges/dcd8894c-a247-4c3f-a443-1ffcb1485be6/public_url",
+  },
+  {
+    title: "Claude Certified Developer – Foundations",
+    sub: "Anthropic · 2026",
+    logo: anthropic, alt: "Anthropic",
+    href: "https://www.credly.com/badges/bc8b667d-9fee-4693-bb14-d6488a3bed2b/public_url",
+  },
+  {
     title: "AWS Solutions Architect – Associate",
     sub: "Amazon Web Services · 2025",
     logo: aws, alt: "AWS", padded: true,
@@ -54,6 +67,9 @@ export const certs = [
     logo: aws, alt: "AWS", padded: true,
     href: "https://www.credly.com/badges/7462e0a4-852e-49f8-a34e-7b8ee3cbdc70/public_url",
   },
+];
+
+export const awards = [
   {
     title: "Nova 111 Student List 2026",
     sub: "Top students under 25 in Spain · Telecom",
